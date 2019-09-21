@@ -3,22 +3,91 @@ package com.revature.service;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 
-public class QueryProcessor {
+import com.revature.exception.InvalidArgumentFormatException;
 
-	private static QueryProcessor queryProcessorSingleton = new QueryProcessor();
+public abstract class QueryProcessor {
 	
-	private QueryProcessor() {}
+	public static <T> String createInsertQuery(T t) throws IllegalArgumentException, IllegalAccessException {
+		ArrayList<ArrayList<Object>> fieldsAndValues = getFieldsAndValues(t);
+		
+		String insertQuery = "INSERT INTO tableName (columnNames) VALUES (insertionValues);";
+		
+		StringBuilder columnNames = new StringBuilder();
+		StringBuilder insertionValues = new StringBuilder();
+		
+		for(ArrayList<Object> fieldAndValue : fieldsAndValues) {
+			String tableName = fieldAndValue.get(0).toString();
+			String tableValue = fieldAndValue.get(1).toString();
+			
+			columnNames.append(tableName);
+			columnNames.append(", ");
+			
+			if (fieldAndValue.get(1).getClass().getTypeName() != "java.lang.String") {
+				insertionValues.append(tableValue);
+			}
+			else {
+				insertionValues.append("'");
+				insertionValues.append(tableValue);
+				insertionValues.append("'");
+			}
+			
+			insertionValues.append(", ");
+		}
+		
+		insertionValues.delete(insertionValues.length() - 2, insertionValues.length());
+		columnNames.delete(columnNames.length() - 2, columnNames.length());
+		
+		insertQuery = insertQuery.replaceAll("insertionValues", insertionValues.toString());
+		return insertQuery.replaceFirst("columnNames", columnNames.toString());
+	}
 	
-	public QueryProcessor getQueryProcessor() {
-		return queryProcessorSingleton;
+	
+	public static <T> String createSelectQuery(T...tList) throws InvalidArgumentFormatException {
+		String selectQuery = "SELECT * FROM tableName WHERE searchConditions";
+		
+		StringBuilder searchConditions = new StringBuilder();
+		
+		boolean isTableName = true;
+		for(T t : tList) {
+				if(isTableName & t.getClass().getCanonicalName() != "java.lang.String") {
+					throw new InvalidArgumentFormatException();
+				}
+				
+				if(isTableName) {
+					searchConditions.append(t + " = ");
+				}
+				else {
+					if(t.getClass().getCanonicalName() != "java.lang.String") {
+						searchConditions.append(t.toString());
+					}
+					else {
+						searchConditions.append("'");
+						searchConditions.append(t);
+						searchConditions.append("'");
+					}
+					
+					searchConditions.append(", ");
+				}
+			
+			isTableName = !isTableName;
+		}
+		
+		if(!isTableName) {
+			throw new InvalidArgumentFormatException("Did not pass in an even number of arguments!");
+		}
+		
+		searchConditions.delete(searchConditions.length() - 2, searchConditions.length());
+		searchConditions.append(";");
+		
+		return selectQuery.replaceAll("searchConditions", searchConditions.toString());
 	}
 	
 	public static <T> String createSelectQuery(T t) throws IllegalArgumentException, IllegalAccessException {
 		ArrayList<ArrayList<Object>> fieldsAndValues = getFieldsAndValues(t);
 		
-		String selectQuery = "SELECT * FROM table WHERE searchConditions";
+		String selectQuery = "SELECT * FROM tableName WHERE searchConditions";
 		
-		StringBuilder searchConditions = null;
+		StringBuilder searchConditions = new StringBuilder();
 		
 		for(ArrayList<Object> fieldAndValue : fieldsAndValues) {
 			String tableName = fieldAndValue.get(0).toString();
@@ -27,7 +96,7 @@ public class QueryProcessor {
 			searchConditions.append(tableName);
 			searchConditions.append(" = ");
 			
-			if (fieldAndValue.get(1).getClass().getTypeName() != "String") {
+			if (fieldAndValue.get(1).getClass().getTypeName() != "java.lang.String") {
 				searchConditions.append(tableValue);
 			}
 			else {
@@ -54,7 +123,7 @@ public class QueryProcessor {
 		
 		for(Field field : t.getClass().getDeclaredFields()) {
 			ArrayList<Object> fieldAndValue = new ArrayList<Object>();
-			
+			field.setAccessible(true);
 			String columnName = field.getName();
 			Object columnField = field.get(t);
 			
