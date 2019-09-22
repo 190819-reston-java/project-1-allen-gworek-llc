@@ -13,6 +13,22 @@ public class Reimbursement implements Comparable<Reimbursement>{
 		this.requestedBy = requestor;
 		this.resolvedBy = resolver;
 	}
+	public Reimbursement(String reimbursementSource, int requestor, int resolver) {
+		this(-1, reimbursementSource, requestor, resolver);
+	}
+	
+	public Reimbursement(String reimbursementSource) {
+		this(-1, reimbursementSource, -1, -1);
+	}
+	
+	public Reimbursement(String reimbursementSource, int requestor) {
+		this(-1, reimbursementSource, requestor, -1);
+	}
+	
+	public Reimbursement(int requestor) {
+		this(-1, "", requestor, -1);
+	}
+	
 	public int getID() {
 		return this.id;
 	}

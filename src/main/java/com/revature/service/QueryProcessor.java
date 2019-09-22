@@ -4,6 +4,7 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 
 import com.revature.exception.InvalidArgumentFormatException;
+import com.revature.exception.UnmatchableTypesException;
 
 public abstract class QueryProcessor {
 	
@@ -18,6 +19,17 @@ public abstract class QueryProcessor {
 		for(ArrayList<Object> fieldAndValue : fieldsAndValues) {
 			String tableName = fieldAndValue.get(0).toString();
 			String tableValue = fieldAndValue.get(1).toString();
+			
+			if(tableName == "id") {
+				continue;
+			}
+			
+			if(tableValue.equals("-1")) {
+				if(tableName == "resolvedBy" || tableName == "requestedBy") {
+					continue;
+				}
+			}
+				
 			
 			columnNames.append(tableName);
 			columnNames.append(", ");
@@ -34,6 +46,7 @@ public abstract class QueryProcessor {
 			insertionValues.append(", ");
 		}
 		
+		
 		insertionValues.delete(insertionValues.length() - 2, insertionValues.length());
 		columnNames.delete(columnNames.length() - 2, columnNames.length());
 		
@@ -41,6 +54,46 @@ public abstract class QueryProcessor {
 		return insertQuery.replaceFirst("columnNames", columnNames.toString());
 	}
 	
+	public static String specifyTable(String queryToSpecify, String tableSelection) {
+		return queryToSpecify.replaceAll("tableName", tableSelection);
+	}
+	
+	public static <T> String specifyUpdateConditions (String queryToSpecify, T...tList) throws InvalidArgumentFormatException {
+		StringBuilder updateConditions = new StringBuilder();
+		
+		boolean isTableName = true;
+		for(T t : tList) {
+			if(isTableName & t.getClass().getCanonicalName() != "java.lang.String") {
+				throw new InvalidArgumentFormatException();
+			}
+			
+			if(isTableName) {
+				updateConditions.append(t + " = ");
+			}
+			else {
+				if(t.getClass().getCanonicalName() != "java.lang.String") {
+					updateConditions.append(t.toString());
+				}
+				else {
+					updateConditions.append("'");
+					updateConditions.append(t);
+					updateConditions.append("'");
+				}
+				
+				updateConditions.append(", ");
+			}
+		
+		isTableName = !isTableName;
+	}
+	
+	if(!isTableName) {
+		throw new InvalidArgumentFormatException("Did not pass in an even number of arguments!");
+	}
+	
+	updateConditions.delete(updateConditions.length() - 2, updateConditions.length());
+		
+		return queryToSpecify.replaceAll("updateConditions", updateConditions.toString());
+	}
 	
 	public static <T> String createSelectQuery(T...tList) throws InvalidArgumentFormatException {
 		String selectQuery = "SELECT * FROM tableName WHERE searchConditions";
@@ -112,6 +165,78 @@ public abstract class QueryProcessor {
 		searchConditions.append(";");
 		
 		return selectQuery.replaceAll("searchConditions", searchConditions.toString());
+	}
+	
+	public static <T> String createUpdateQuery(T...tlist) throws InvalidArgumentFormatException {
+		
+		String updateQuery = "UPDATE tableName "
+							+ "SET updateValues "
+							+ "WHERE updateConditions;";
+		
+		StringBuilder updateValues = new StringBuilder();
+		
+		boolean isTableName = true;
+		for(T t: tlist) {
+			if(isTableName & t.getClass().getCanonicalName() != "java.lang.String") {
+				throw new InvalidArgumentFormatException();
+			}
+			
+			if(isTableName) {
+				updateValues.append(t + " = ");
+			}
+			else {
+				if(t.getClass().getCanonicalName() != "java.lang.String") {
+					updateValues.append(t.toString());
+				}
+				else {
+					updateValues.append("'");
+					updateValues.append(t);
+					updateValues.append("'");
+				}
+				
+				updateValues.append(", ");
+			}
+		
+		isTableName = !isTableName;
+		}
+		
+		if(!isTableName) {
+			throw new InvalidArgumentFormatException("Did not pass in an even number of arguments!");
+		}
+		
+		updateValues.delete(updateValues.length() - 2, updateValues.length());
+		
+		return updateQuery.replaceFirst("updateValues", updateValues.toString());
+	}
+
+	public static <T> String createUpdateToMatchOther(T first, T other) throws UnmatchableTypesException, IllegalArgumentException, IllegalAccessException {
+		
+		if (first.getClass().getTypeName() != other.getClass().getTypeName()) {
+			throw new UnmatchableTypesException();
+		}
+		
+		ArrayList<ArrayList<Object>> firstTypesAndFields = new ArrayList<ArrayList<Object>>();
+		ArrayList<ArrayList<Object>> otherTypesAndFields = new ArrayList<ArrayList<Object>>();
+		
+		firstTypesAndFields = getFieldsAndValues(first);
+		otherTypesAndFields = getFieldsAndValues(other);
+		
+		ArrayList<Object> formattedUpdateConditionsArray = new ArrayList<Object>();
+		ArrayList<Object> formattedUpdateValuesArray = new ArrayList<Object>();
+		
+		for(int index = 0; index < firstTypesAndFields.size(); index++) {
+			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(0));
+			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(1));
+			
+			formattedUpdateValuesArray.add(firstTypesAndFields.get(index).get(0));
+			formattedUpdateValuesArray.add(otherTypesAndFields.get(index).get(1));
+		}
+		
+		Object[] fieldsToBePassedForConditions = formattedUpdateConditionsArray.toArray();
+		Object[] fieldsToBePassedForValues = formattedUpdateValuesArray.toArray();
+		
+		String updateQuery = createUpdateQuery(fieldsToBePassedForValues);
+		return specifyUpdateConditions(updateQuery, fieldsToBePassedForConditions);
 	}
 	
 	private static <T> ArrayList<ArrayList<Object>> getFieldsAndValues(T t) throws IllegalArgumentException, IllegalAccessException {
