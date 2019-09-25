@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.revature.model.Employee;
 import com.revature.repository.DatabaseConnection;
+import com.revature.service.JSONToObject;
 import com.revature.service.ObjectToJSON;
 import com.revature.service.QueryProcessor;
 
@@ -35,6 +36,8 @@ public class EmployeeObjectHandler extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		Employee newEmployee = JSONToObject.convertEmployeeJSONToObject(jsonObject);
+		pw.write(newEmployee.toString());
 	}
 	
 	

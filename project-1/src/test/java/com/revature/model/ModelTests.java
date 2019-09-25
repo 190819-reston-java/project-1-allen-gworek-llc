@@ -43,7 +43,7 @@ public class ModelTests {
 		assertEquals("Address", newEmployee.getAddress());
 		assertEquals("Email", newEmployee.getEmail());
 		assertEquals("Password", newEmployee.getPassword());
-		assertEquals(false, newEmployee.isManager());
+		assertEquals(false, newEmployee.isManagerStatus());
 	}
 	
 	// Reimbursement Object Test
@@ -52,10 +52,10 @@ public class ModelTests {
 	@Test
 	public void reimbursementObjectTest() {
 		
-		assertEquals(1, newReimbursement.getID());
+		assertEquals(1, newReimbursement.getId());
 		assertEquals("Reimbursement Source", newReimbursement.getReimbursementSource());
-		assertEquals(1, newReimbursement.getRequestor());
-		assertEquals(2, newReimbursement.getResolver());
+		assertEquals(1, newReimbursement.getRequestedBy());
+		assertEquals(2, newReimbursement.getResolvedBy());
 	}
 
 	// EmployeeList Object Test

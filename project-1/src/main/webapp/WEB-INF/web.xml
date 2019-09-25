@@ -14,12 +14,32 @@
 		<servlet-name>Reimbursement</servlet-name>
 		<servlet-class>com.revature.servlets.ReimbursementObjectHandler</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>com.revature.servlets.UserRegistrationServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>CreateReimbursement</servlet-name>
+		<servlet-class>com.revature.servlets.ReimbursementCreationServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateReimbursement</servlet-name>
+		<url-pattern>/createReimbursement</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/registerAction</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>Employee</servlet-name>
 		<url-pattern>/employeeHandler</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>Reimbursement</servlet-name>
 		<url-pattern>/reimbursementHandler</url-pattern>
