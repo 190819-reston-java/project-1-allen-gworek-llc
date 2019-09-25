@@ -2,7 +2,7 @@ package com.revature.model;
 
 import java.util.ArrayList;
 
-public class Employee implements Comparable<Employee> {
+public class Employee implements Comparable<Employee>, AppUsable {
 
 	private int id;
 	private String fullName;

@@ -2,7 +2,7 @@ package com.revature.model;
 
 import java.util.ArrayList;
 
-public class ReimbursementList extends ArrayList<Reimbursement>{
+public class ReimbursementList extends ArrayList<Reimbursement> implements AppUsable {
 
 	public ReimbursementList(Reimbursement...reimbursements) {
 

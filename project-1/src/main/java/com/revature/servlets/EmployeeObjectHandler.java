@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.revature.model.Employee;
 import com.revature.repository.DatabaseConnection;
+import com.revature.service.ObjectToJSON;
 import com.revature.service.QueryProcessor;
 
 public class EmployeeObjectHandler extends HttpServlet {
@@ -17,18 +19,10 @@ public class EmployeeObjectHandler extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Employee myEmployee = new Employee("Test Name");
-		DatabaseConnection myConnector = new DatabaseConnection();
+		String jsonObject = ObjectToJSON.convertObjectToJSON(myEmployee);
 		
-		try {
-			String queryToExecute = QueryProcessor.specifyTable(QueryProcessor.createInsertQuery(myEmployee), "employees");
-			myConnector.executeQueryInDatabase(queryToExecute);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		PrintWriter pw = resp.getWriter();
+		pw.write(jsonObject);
 	}
 	
 	

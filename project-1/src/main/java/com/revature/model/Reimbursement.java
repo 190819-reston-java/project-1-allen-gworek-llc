@@ -1,6 +1,6 @@
 package com.revature.model;
 
-public class Reimbursement implements Comparable<Reimbursement>{
+public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 
 	private int id;
 	private String reimbursementSource;
