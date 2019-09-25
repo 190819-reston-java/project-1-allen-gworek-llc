@@ -23,6 +23,18 @@ public class EmployeeObjectHandler extends HttpServlet {
 		
 		PrintWriter pw = resp.getWriter();
 		pw.write(jsonObject);
+		
+		DatabaseConnection myConnection = new DatabaseConnection();
+		String queryToProcess;
+		try {
+			queryToProcess = QueryProcessor.createInsertQuery(myEmployee);
+			queryToProcess = QueryProcessor.specifyTable(queryToProcess, "employees");
+			myConnection.executeQueryInDatabase(queryToProcess);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

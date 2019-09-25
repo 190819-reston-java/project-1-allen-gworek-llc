@@ -19,13 +19,16 @@ public class ConnectionUtil {
 			String url = props.getProperty("url");
 			String username = props.getProperty("username");
 			String password = props.getProperty("password");
-			
+			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(url, username, password);
 			}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conn;
