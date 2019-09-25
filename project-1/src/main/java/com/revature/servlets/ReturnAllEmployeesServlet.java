@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.model.Employee;
 import com.revature.model.EmployeeList;
 import com.revature.repository.DatabaseConnection;
+import com.revature.service.ObjectToJSON;
 
 public class ReturnAllEmployeesServlet extends HttpServlet {
 
@@ -23,42 +24,8 @@ public class ReturnAllEmployeesServlet extends HttpServlet {
 
 		DatabaseConnection dbc = new DatabaseConnection();
 
-		try {
-			ResultSet allEmployees = dbc.executeQueryInDatabase("SELECT * FROM employees");
-			EmployeeList allEmployeesFormattedList = new EmployeeList();
-			
-			ResultSetMetaData newMetaData = allEmployees.getMetaData();
-			ArrayList<String> columnNames = new ArrayList<String>();
-			
-			for(int columnIndex = 0; columnIndex < newMetaData.getColumnCount(); columnIndex++) {
-				String currentColumnIndexName;
-				currentColumnIndexName = newMetaData.getColumnName(columnIndex);
-				columnNames.add(currentColumnIndexName);
-			}
-			
-			while (allEmployees.next()) {
-
-				ArrayList<Object> currentColumnValues = new ArrayList<Object>();
-				for(int columnIndex = 0; columnIndex < newMetaData.getColumnCount(); columnIndex++) {
-					currentColumnValues.add(allEmployees.getObject(columnIndex));
-				}
-				
-				Employee newEmployee = new Employee();
-				
-				Method[] allObjectMethods = newEmployee.getClass().getDeclaredMethods();
-				
-				for(Method currentMethod : allObjectMethods) {
-					if (currentMethod.isAnnotationPresent(Setter.class)) {
-						
-					}
-				}
-				
-				allEmployeesFormattedList.add(newEmployee);
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		ResultSet allEmployees = dbc.executeQueryInDatabase("SELECT * FROM employees;");
+		String ResultSetJSONOfAllEmployees = ObjectToJSON.convertObjectToJSON(allEmployees);
 	}
 
 }

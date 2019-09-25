@@ -209,6 +209,52 @@ public abstract class QueryProcessor {
 		return updateQuery.replaceFirst("updateValues", updateValues.toString());
 	}
 
+	public static <T> String createUpdateQuery(T t) throws IllegalArgumentException, IllegalAccessException {
+
+		ArrayList<ArrayList<Object>> fieldsAndValues = getFieldsAndValues(t);
+		
+		String updateQuery = "UPDATE tableName "
+							+ "SET updateValues "
+							+ "WHERE updateConditions;";
+		
+		StringBuilder updateValues = new StringBuilder();
+		
+		for(ArrayList<Object> fieldAndValue : fieldsAndValues) {
+			String tableName = fieldAndValue.get(0).toString();
+			String tableValue = fieldAndValue.get(1).toString();
+			
+			if(tableName == "id") {
+				continue;
+			}
+			
+			if(tableValue.equals("-1")) {
+				if(tableName == "resolvedBy" || tableName == "requestedBy") {
+					continue;
+				}
+			}
+				
+			
+			updateValues.append(tableName);
+			updateValues.append(" = ");
+			
+			if (fieldAndValue.get(1).getClass().getTypeName() != "java.lang.String") {
+				updateValues.append(tableValue);
+			}
+			else {
+				updateValues.append("'");
+				updateValues.append(tableValue);
+				updateValues.append("'");
+			}
+			
+			updateValues.append(", ");
+		}
+		
+		
+		updateValues.delete(updateValues.length() - 2, updateValues.length());
+		
+		return updateQuery.replaceAll("updateValues", updateValues.toString());
+	}
+	
 	public static <T> String createUpdateToMatchOther(T first, T other) throws UnmatchableTypesException, IllegalArgumentException, IllegalAccessException {
 		
 		if (first.getClass().getTypeName() != other.getClass().getTypeName()) {
@@ -238,7 +284,7 @@ public abstract class QueryProcessor {
 		String updateQuery = createUpdateQuery(fieldsToBePassedForValues);
 		return specifyUpdateConditions(updateQuery, fieldsToBePassedForConditions);
 	}
-	
+
 	private static <T> ArrayList<ArrayList<Object>> getFieldsAndValues(T t) throws IllegalArgumentException, IllegalAccessException {
 		/** 
 		 * Returns an array of (initially) two-item arrays of type T that contain a String

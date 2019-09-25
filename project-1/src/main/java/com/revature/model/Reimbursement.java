@@ -1,8 +1,5 @@
 package com.revature.model;
 
-import com.revature.annotations.Getter;
-import com.revature.annotations.Setter;
-
 public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 
 	private int id;
@@ -32,45 +29,38 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 		this(-1, "", requestor, -1);
 	}
 	
-	@Getter
 	public int getId() {
 		return id;
 	}
 	
-	@Setter
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	@Getter
 	public String getReimbursementSource() {
 		return reimbursementSource;
 	}
 	
-	@Setter
 	public void setReimbursementSource(String reimbursementSource) {
 		this.reimbursementSource = reimbursementSource;
 	}
 	
-	@Getter
 	public int getRequestedBy() {
 		return requestedBy;
 	}
 	
-	@Setter
 	public void setRequestedBy(int requestedBy) {
 		this.requestedBy = requestedBy;
 	}
 	
-	@Getter
 	public int getResolvedBy() {
 		return resolvedBy;
 	}
 	
-	@Setter
 	public void setResolvedBy(int resolvedBy) {
 		this.resolvedBy = resolvedBy;
 	}
+	
 	public int compareTo(Reimbursement other) {
 		if(this.id == other.id) {
 			return 0;

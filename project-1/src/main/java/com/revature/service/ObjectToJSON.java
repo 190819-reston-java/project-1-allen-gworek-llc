@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class ObjectToJSON {
 
-	public static String convertObjectToJSON(AppUsable objectToConvert) throws JsonProcessingException {
+	public static <T> String convertObjectToJSON(T objectToConvert) throws JsonProcessingException {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
