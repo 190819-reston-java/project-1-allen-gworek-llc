@@ -9,7 +9,14 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 	private boolean isApproved;
 	private String imageURL;
 	
-	
+	public Reimbursement() {
+		this.id = -1;
+		this.reimbursementSource = "";
+		this.requestedBy = -1;
+		this.resolvedBy = -1;
+		this.isApproved = false;
+		this.imageURL = "";
+	}
 	
 	public Reimbursement(int id, String reimbursementSource, int requestedBy, int resolvedBy, boolean isApproved,
 			String imageURL) {

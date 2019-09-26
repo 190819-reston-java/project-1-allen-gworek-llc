@@ -18,7 +18,7 @@ import com.revature.service.QueryProcessor;
 public class UpdateEmployeeInformationServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String passedInEmployeeJSON = req.getParameter("passedInEmployeeJSON");
 		Employee updatedEmployeeInfo = JSONToObject.convertEmployeeJSONToObject(passedInEmployeeJSON);
@@ -28,31 +28,17 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 		try {
 			ResultSet existingEmployeeResults = dbc.executeQueryInDatabase(
 					"SELECT * FROM employees WHERE id = " + Integer.toString(updatedEmployeeInfo.getID()) + ";");
+			
+			existingEmployeeResults.next();
 
-			Field[] updatedEmployeeFields = updatedEmployeeInfo.getClass().getFields();
-			for (Field currentField : updatedEmployeeFields) {
-				currentField.setAccessible(true);
-				if (currentField.getType().equals("java.lang.String")) {
-					if (currentField.get(updatedEmployeeInfo).equals("")) {
-						currentField.set(updatedEmployeeInfo,
-								existingEmployeeResults.getString(currentField.getName()));
-					}
-				}
-				if (currentField.getType().equals("int")) {
-					if (currentField.get(updatedEmployeeInfo).equals(-1)) {
-						currentField.set(updatedEmployeeInfo, existingEmployeeResults.getInt(currentField.getName()));
-					}
-				}
-			}
-
-			String updateQuery = QueryProcessor.createUpdateQuery(updatedEmployeeInfo);
-			updateQuery = QueryProcessor.specifyUpdateConditions(updateQuery, "id", updatedEmployeeInfo.getID());
+			Employee retrievedEmployee = QueryProcessor.createEmployeeFromQueryResults(existingEmployeeResults);
+			
+			String updateQuery = QueryProcessor.createUpdateToMatchOther(retrievedEmployee, updatedEmployeeInfo);
 			updateQuery = QueryProcessor.specifyTable(updateQuery, "employees");
 
 			dbc.executeQueryInDatabase(updateQuery);
 		} catch (IllegalArgumentException | IllegalAccessException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 

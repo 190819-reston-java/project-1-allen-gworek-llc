@@ -15,7 +15,7 @@ import com.revature.service.QueryProcessor;
 public class ViewTargetEmployeeReimbursementsServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DatabaseConnection dbc = new DatabaseConnection();
 		
 		int valueToSearch = Integer.valueOf(req.getParameter("requestedBy"));

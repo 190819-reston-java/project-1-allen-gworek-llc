@@ -6,16 +6,6 @@
 	<display-name>Archetype Created Web Application</display-name>
 
 	<servlet>
-		<servlet-name>Employee</servlet-name>
-		<servlet-class>com.revature.servlets.EmployeeObjectHandler</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>Reimbursement</servlet-name>
-		<servlet-class>com.revature.servlets.ReimbursementObjectHandler</servlet-class>
-	</servlet>
-
-	<servlet>
 		<servlet-name>Registration</servlet-name>
 		<servlet-class>com.revature.servlets.UserRegistrationServlet</servlet-class>
 	</servlet>
@@ -25,23 +15,85 @@
 		<servlet-class>com.revature.servlets.ReimbursementCreationServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>ResolveReimbursement</servlet-name>
+		<servlet-class>com.revature.servlets.ReimbursementResolverServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ReturnAllEmployees</servlet-name>
+		<servlet-class>com.revature.servlets.ReturnAllEmployesServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>UpdateInformation</servlet-name>
+		<servlet-class>com.revature.servlets.UpdateEmployeeInformationServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ViewPending</servlet-name>
+		<servlet-class>com.revature.servlets.ViewPendingReimbursementsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ViewResolved</servlet-name>
+		<servlet-class>com.revature.servlets.ViewResolvedReimbursementsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ViewTargetReimbursements</servlet-name>
+		<servlet-class>com.revature.servlets.ViewTargetEmployeeReimbursementsServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ViewAllReimbursements</servlet-name>
+		<servlet-class>com.revature.servlets.ViewAllReimbursementsServlet</servlet-class>
+	</servlet>
+	
+	
+	
+	<servlet-mapping>
+		<servlet-name>ViewAllReimbursements</servlet-name>
+		<url-pattern>/reimbursements/view/all</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ViewTargetReimbursements</servlet-name>
+		<url-pattern>/employees/view/target/reimbursements</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ViewResolved</servlet-name>
+		<url-pattern>reimbursements/resolved</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ViewPending</servlet-name>
+		<url-pattern>/reimbursements/pending</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>UpdateInformation</servlet-name>
+		<url-pattern>/info/update</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ReturnAllEmployees</servlet-name>
+		<url-pattern>/employees/view/all</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ResolveReimbursement</servlet-name>
+		<url-pattern>/reimbursements/resolve</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>CreateReimbursement</servlet-name>
-		<url-pattern>/createReimbursement</url-pattern>
+		<url-pattern>/reimbursements/create</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Registration</servlet-name>
-		<url-pattern>/registerAction</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Employee</servlet-name>
-		<url-pattern>/employeeHandler</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Reimbursement</servlet-name>
-		<url-pattern>/reimbursementHandler</url-pattern>
+		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -15,7 +15,7 @@ import com.revature.service.QueryProcessor;
 public class ViewResolvedReimbursementsServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DatabaseConnection dbc = new DatabaseConnection();
 		String currentEmployeeID = req.getParameter("currentEmployeeID");
 		String getResolvedReimbursementsForEmployee;

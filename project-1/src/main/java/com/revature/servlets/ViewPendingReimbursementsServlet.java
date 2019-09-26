@@ -15,15 +15,16 @@ import com.revature.service.QueryProcessor;
 public class ViewPendingReimbursementsServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		DatabaseConnection dbc = new DatabaseConnection();
-		int employeeID = Integer.valueOf(req.getParameter("employeeID"));
+		String employeeID = req.getParameter("employeeID");
+
+		String findEmployeePendingReimbursements = "SELECT * FROM reimbursements WHERE requestedBy = employeeID AND resolvedBy IS NULL;";
+		findEmployeePendingReimbursements = findEmployeePendingReimbursements.replaceAll("employeeID", employeeID);
 		
-		String findEmployeePendingReimbursements = QueryProcessor.createSelectQuery("requestedBy", employeeID);
-		findEmployeePendingReimbursements = QueryProcessor.specifyTable(findEmployeePendingReimbursements, "reimbursements");
 		ResultSet pendingReimbursements = dbc.executeQueryInDatabase(findEmployeePendingReimbursements);
-		
+
 		ObjectToJSON.convertObjectToJSON(pendingReimbursements);
 	}
 }
