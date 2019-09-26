@@ -86,9 +86,10 @@ public class DatabaseConnection {
 				String reimbursementSource = results.getString("reimbursementSource");
 				int requestedBy = results.getInt("requestedBy");
 				int resolvedBy = results.getInt("resolvedBy");
+				boolean isApproved = results.getBoolean("isApproved");
 
 				Reimbursement returnReimbursement = new Reimbursement(reimbursementID, reimbursementSource, 
-																	  requestedBy, resolvedBy);
+																	  requestedBy, resolvedBy, isApproved);
 
 				return returnReimbursement;
 			}

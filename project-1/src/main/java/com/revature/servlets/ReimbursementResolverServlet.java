@@ -26,7 +26,17 @@ public class ReimbursementResolverServlet extends HttpServlet {
 		Reimbursement updateReimbursement = JSONToObject.convertReimbursementJSONtoObject(JSONOfTargetReimbursement);
 		Reimbursement reimbursementToSearchFor = JSONToObject.convertReimbursementJSONtoObject(JSONOfTargetReimbursement);
 		
+		boolean approvalStatus;
+		if(resolveAction.equals("Approved")) {
+			approvalStatus = true;
+		}
+		else {
+			approvalStatus = false;
+		}
+		
 		updateReimbursement.setResolvedBy(managerID);
+		updateReimbursement.setApproved(approvalStatus);
+		
 		
 		String updateQuery;
 		try {
