@@ -29,62 +29,82 @@
 		<servlet-name>UpdateInformation</servlet-name>
 		<servlet-class>com.revature.servlets.UpdateEmployeeInformationServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ViewPending</servlet-name>
 		<servlet-class>com.revature.servlets.ViewPendingReimbursementsServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ViewResolved</servlet-name>
 		<servlet-class>com.revature.servlets.ViewResolvedReimbursementsServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ViewTargetReimbursements</servlet-name>
 		<servlet-class>com.revature.servlets.ViewTargetEmployeeReimbursementsServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ViewAllReimbursements</servlet-name>
 		<servlet-class>com.revature.servlets.ViewAllReimbursementsServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>ViewCurrentUser</servlet-name>
 		<servlet-class>com.revature.servlets.ViewCurrentUserServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>LogInUser</servlet-name>
 		<servlet-class>com.revature.servlets.LoginUserServlet</servlet-class>
 	</servlet>
-	
+
+	<servlet>
+		<servlet-name>ViewAllPending</servlet-name>
+		<servlet-class>com.revature.servlets.ViewAllPendingReimbursementsServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ViewAllResolved</servlet-name>
+		<servlet-class>com.revature.servlets.ViewAllResolvedReimbursementsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ViewAllResolved</servlet-name>
+		<url-pattern>/reimbursements/resolved/all</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ViewAllPending</servlet-name>
+		<url-pattern>/reimbursements/pending/all</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>LogInUser</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ViewCurrentUser</servlet-name>
 		<url-pattern>/users/current</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ViewAllReimbursements</servlet-name>
 		<url-pattern>/reimbursements/view/all</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ViewTargetReimbursements</servlet-name>
 		<url-pattern>/employees/view/target/reimbursements</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ViewResolved</servlet-name>
 		<url-pattern>/reimbursements/resolved</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>ViewPending</servlet-name>
 		<url-pattern>/reimbursements/pending</url-pattern>
