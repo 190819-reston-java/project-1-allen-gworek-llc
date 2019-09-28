@@ -57,7 +57,7 @@
                 </div>
             </nav>
             <main class="col-xl-10 col-sm-12 col-md-12 ml-sm-auto col-12">
-                <form action="#" method="POST">
+                <form action="/project-1/reimbursements/create" method="POST">
                     <br>            
                     <div class="form-group">
                                     <h2>Submit Reimbursement
@@ -65,11 +65,11 @@
                                     </h2>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ReimbursementAmount">Reimbursement Amount</label>
+                                    <label for="dollarAmount">Reimbursement Amount</label>
                                     <input type="number" class="form-control" id=newAmount name="amount" placeholder="1234.99" min="0.01" step="0.01" pattern="[^\\]+" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ReimbursementDescription">Description</label>
+                                    <label for="reimbursementSource">Description</label>
                                     <input type="text" class="form-control" id=newDescription name="description" placeholder="Jon's Tuba Lessons" pattern="[^\\]+" required>
                                 </div>
                                 
