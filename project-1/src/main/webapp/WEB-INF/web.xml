@@ -50,7 +50,25 @@
 		<servlet-class>com.revature.servlets.ViewAllReimbursementsServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>ViewCurrentUser</servlet-name>
+		<servlet-class>com.revature.servlets.ViewCurrentUserServlet</servlet-class>
+	</servlet>
 	
+	<servlet>
+		<servlet-name>LogInUser</servlet-name>
+		<servlet-class>com.revature.servlets.LoginUserServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LogInUser</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ViewCurrentUser</servlet-name>
+		<url-pattern>/users/current</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>ViewAllReimbursements</servlet-name>
@@ -64,7 +82,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>ViewResolved</servlet-name>
-		<url-pattern>reimbursements/resolved</url-pattern>
+		<url-pattern>/reimbursements/resolved</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
