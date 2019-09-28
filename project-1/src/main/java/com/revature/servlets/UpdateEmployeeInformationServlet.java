@@ -42,7 +42,22 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 
 				try {
 					currentField.setAccessible(true);
-					currentField.set(updatedEmployeeValues, req.getParameter(currentAttribute));
+					if (req.getParameter(currentAttribute).equals("")) {
+						Field otherField = currentEmployee.getClass().getDeclaredField(currentAttribute);
+						otherField.setAccessible(true);
+
+						if (otherField.getType().toString().equals("class java.lang.String")) {
+							currentField.set(updatedEmployeeValues, (String) otherField.get(currentEmployee));
+						}
+						if (otherField.getType().toString().equals("int")) {
+							currentField.set(updatedEmployeeValues, otherField.getInt(currentEmployee));
+						}
+						if (otherField.getType().toString().equals("boolean")) {
+							currentField.set(updatedEmployeeValues, otherField.getBoolean(currentEmployee));
+						}
+					} else {
+						currentField.set(updatedEmployeeValues, req.getParameter(currentAttribute));
+					}
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -59,17 +74,17 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 		try {
 			String updateQuery = QueryProcessor.createUpdateToMatchOther(currentEmployee, updatedEmployeeValues);
 			updateQuery = QueryProcessor.specifyTable(updateQuery, "employees");
-
+			System.out.println(updateQuery);
 			dbc.executeQueryInDatabase(updateQuery);
-			
+
 			try {
-				req.getSession().setAttribute
-				("currentUser", 
-						ObjectToJSON.convertObjectToJSON(
-								QueryProcessor.createEmployeeFromQueryResults(
-										dbc.executeQueryInDatabase(
-												"SELECT * FROM employees WHERE id = " + 
-										String.valueOf(currentEmployee.getID())))));
+				String retrieveCurrentUserQuery = "SELECT * FROM employees WHERE id = " + currentEmployee.getID() + ";";
+				ResultSet currentUserResults = dbc.executeQueryInDatabase(retrieveCurrentUserQuery);
+				currentUserResults.next();
+
+				req.getSession().setAttribute("currentUser", ObjectToJSON
+						.convertObjectToJSON(QueryProcessor.createEmployeeFromQueryResults(currentUserResults)));
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -77,7 +92,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 
 		}
-		
+
 		resp.sendRedirect("/project-1/homepage.html");
 	}
 

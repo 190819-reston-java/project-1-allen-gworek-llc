@@ -80,7 +80,7 @@ public abstract class QueryProcessor {
 					updateConditions.append("'");
 				}
 
-				updateConditions.append(", ");
+				updateConditions.append(" AND ");
 			}
 
 			isTableName = !isTableName;
@@ -90,7 +90,7 @@ public abstract class QueryProcessor {
 			throw new InvalidArgumentFormatException("Did not pass in an even number of arguments!");
 		}
 
-		updateConditions.delete(updateConditions.length() - 2, updateConditions.length());
+		updateConditions.delete(updateConditions.length() - 5, updateConditions.length());
 
 		return queryToSpecify.replaceAll("updateConditions", updateConditions.toString());
 	}
@@ -260,6 +260,11 @@ public abstract class QueryProcessor {
 		ArrayList<Object> formattedUpdateValuesArray = new ArrayList<Object>();
 
 		for (int index = 0; index < firstTypesAndFields.size(); index++) {
+			
+			if (firstTypesAndFields.get(index).get(0).equals("id")) {
+				continue;
+			}
+			
 			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(0));
 			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(1));
 
