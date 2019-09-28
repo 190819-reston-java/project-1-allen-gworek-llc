@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,29 +20,10 @@ public class ViewCurrentUserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		DatabaseConnection dbc = new DatabaseConnection();
-		int employeeID = Integer.valueOf(req.getParameter("employeeID"));
+		PrintWriter pw = resp.getWriter();
 		
-		String queryToRetrieveEmployeeInfo = QueryProcessor.createSelectQuery("id", employeeID);
-		queryToRetrieveEmployeeInfo = QueryProcessor.specifyTable(queryToRetrieveEmployeeInfo, "employees");
-		
-		ResultSet returnedEmployeeInfo = dbc.executeQueryInDatabase(queryToRetrieveEmployeeInfo);
-		
-		try {
-		returnedEmployeeInfo.next();	
-		Employee employeeFromDatabase = QueryProcessor.createEmployeeFromQueryResults(returnedEmployeeInfo);
-		
-		ObjectToJSON.convertObjectToJSON(employeeFromDatabase);
-		
-	}
-		catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String currentUser = (String)req.getSession().getAttribute("currentUser");
+
+		pw.write(currentUser);
 	}
 }

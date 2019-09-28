@@ -26,19 +26,22 @@ public class LoginUserServlet extends HttpServlet {
 		String queryToGetUser = QueryProcessor.createSelectQuery("email", targetEmail, "userPassword", targetPassword);
 		queryToGetUser = QueryProcessor.specifyTable(queryToGetUser, "employees");
 		
+		System.out.println(queryToGetUser);
+		
 		DatabaseConnection dbc = new DatabaseConnection();
 		
 		ResultSet queryResults = dbc.executeQueryInDatabase(queryToGetUser);
+		
 		
 		try {
 			if(queryResults.next()) {
 				Employee loggedInEmployee = QueryProcessor.createEmployeeFromQueryResults(queryResults);
 				String JSONOfLoggedInEmployee = ObjectToJSON.convertObjectToJSON(loggedInEmployee);
 				req.getSession().setAttribute("currentUser", JSONOfLoggedInEmployee);
-				resp.sendRedirect("localhost:8080/project-1/homepage.html");
+				resp.sendRedirect("/project-1/homepage.html");
 			}
 			else {
-				resp.sendRedirect("localhost:8080/project-1/loginpage.html");
+				resp.sendRedirect("/project-1/loginpage.html");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

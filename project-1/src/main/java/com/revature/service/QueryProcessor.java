@@ -117,7 +117,7 @@ public abstract class QueryProcessor {
 					searchConditions.append("'");
 				}
 
-				searchConditions.append(", ");
+				searchConditions.append(" AND ");
 			}
 
 			isTableName = !isTableName;
@@ -127,7 +127,7 @@ public abstract class QueryProcessor {
 			throw new InvalidArgumentFormatException("Did not pass in an even number of arguments!");
 		}
 
-		searchConditions.delete(searchConditions.length() - 2, searchConditions.length());
+		searchConditions.delete(searchConditions.length() - 5, searchConditions.length());
 		searchConditions.append(";");
 
 		return selectQuery.replaceAll("searchConditions", searchConditions.toString());
@@ -303,25 +303,28 @@ public abstract class QueryProcessor {
 
 		Employee createdEmployee = new Employee();
 
-		Field[] fieldsToUpdate = createdEmployee.getClass().getFields();
-		for (Field currentField : fieldsToUpdate) {
+		System.out.println(createdEmployee);
+		for (Field currentField : createdEmployee.getClass().getDeclaredFields()) {
 			currentField.setAccessible(true);
-			if (currentField.getType().equals("java.lang.String")) {
+			if (currentField.getType().toString().equals("class java.lang.String")) {
 				if (employeeResults.getString(currentField.getName()) == null) {
 					currentField.set(createdEmployee, "");
 				}
 				currentField.set(createdEmployee, employeeResults.getString(currentField.getName()));
+				System.out.println("Created Employee value for " + currentField.getName());
 			}
-			if (currentField.getType().equals("int")) {
+			if (currentField.getType().toString().equals("int")) {
 
 				if (employeeResults.getInt(currentField.getName()) == 0) {
 					currentField.set(createdEmployee, -1);
 				} else {
 					currentField.set(createdEmployee, employeeResults.getInt(currentField.getName()));
+					System.out.println("Created Employee value for " + currentField.getName());
 				}
-				if (currentField.getType().equals("boolean")) {
-					currentField.set(createdEmployee, employeeResults.getBoolean(currentField.getName()));
-				}
+			}
+			if (currentField.getType().toString().equals("boolean")) {
+				currentField.set(createdEmployee, employeeResults.getBoolean(currentField.getName()));
+				System.out.println("Created Employee value for " + currentField.getName());
 			}
 		}
 
@@ -332,24 +335,23 @@ public abstract class QueryProcessor {
 			throws IllegalArgumentException, IllegalAccessException, SQLException {
 		Reimbursement createdReimbursement = new Reimbursement();
 
-		Field[] fieldsToUpdate = createdReimbursement.getClass().getFields();
-		for (Field currentField : fieldsToUpdate) {
+		for (Field currentField : createdReimbursement.getClass().getDeclaredFields()) {
 			currentField.setAccessible(true);
-			if (currentField.getType().equals("java.lang.String")) {
+			if (currentField.getType().toString().equals("class java.lang.String")) {
 				if (reimbursementResults.getString(currentField.getName()) == null) {
 					currentField.set(createdReimbursement, "");
 				} else {
 					currentField.set(createdReimbursement, reimbursementResults.getString(currentField.getName()));
 				}
 			}
-			if (currentField.getType().equals("int")) {
+			if (currentField.getType().toString().equals("int")) {
 				if (reimbursementResults.getInt(currentField.getName()) == 0) {
 					currentField.set(createdReimbursement, -1);
 				} else {
 					currentField.set(createdReimbursement, reimbursementResults.getInt(currentField.getName()));
 				}
 			}
-			if (currentField.getType().equals("boolean")) {
+			if (currentField.getType().toString().equals("boolean")) {
 				currentField.set(createdReimbursement, reimbursementResults.getBoolean(currentField.getName()));
 			}
 		}

@@ -27,16 +27,16 @@ public class DatabaseConnection {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+/*		} finally {
 			try {
 				if (results != null) {
-					results.close();
+					//results.close();
 				}
-				statement.close();
-				conn.close();
+				//statement.close();
+				//conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 
 		return results;
