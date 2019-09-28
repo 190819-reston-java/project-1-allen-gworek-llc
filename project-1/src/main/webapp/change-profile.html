@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="submit-reimbursement.html">
+                            <a class="nav-link" href="submit-reimbursement.html">
                                 Reimbursement Form
                             </a>
                         </li>
@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="profile.html">
+                            <a class="nav-link active" href="profile.html">
                                 Profile
                             </a>
                         </li>
@@ -57,22 +57,47 @@
                 </div>
             </nav>
             <main class="col-xl-10 col-sm-12 col-md-12 ml-sm-auto col-12">
-                <form action="#" method="POST">
+                <form action="#" method="PUT">
                     <br>            
                     <div class="form-group">
-                                    <h2>Submit Reimbursement
+                                    <h2>Update Info
                                         <br>
                                     </h2>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ReimbursementAmount">Reimbursement Amount</label>
-                                    <input type="number" class="form-control" id=newAmount name="amount" placeholder="1234.99" min="0.01" step="0.01" pattern="[^\\]+" required>
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" id=newEmail name="username"
+                                        placeholder="Email@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ReimbursementDescription">Description</label>
-                                    <input type="text" class="form-control" id=newDescription name="description" placeholder="Jon's Tuba Lessons" pattern="[^\\]+" required>
+                                    <label for="Password">Password</label>
+                                    <input type="password" class="form-control" id=newPassword name="password" placeholder=Password pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label for="Full Name">Full Name</label>
+                                    <input type="text" class="form-control" id=newName name="name" placeholder="John Smith" pattern="[^\\]*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address 1">Address 1</label>
+                                    <input type="text" class="form-control" id=addressOne name="addressone"
+                                        placeholder="1234 Your Street" pattern="[^\\]*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address 2">Address 2</label>
+                                    <input type="text" class="form-control" id=addressTwo name="addresstwo" placeholder="Apt. #567" pattern="[^\\]*">
+                                </div>
+                                <span class="form-group">
+                                    <label for="City">City</label>
+                                    <input type="text" class="form-control" id=city name="city" placeholder="Townsville" pattern="[^\\]*">
+                                </span>
+                                <span class="form-group">
+                                    <label for="State">State</label>
+                                    <input type="text" class="form-control" id=state name="state" placeholder="VA" pattern="[A-Z]{2}">
+                                </span>
+                                <span class="form-group">
+                                    <label for="Zipcode">Zipcode</label>
+                                    <input type="text" class="form-control" id=zip name="zip" placeholder="12345" pattern="[0-9]{6}">
+                                </span>
                                 <div><br></div>
                                 <button type="submit" class="btn btn-dark">Submit</button>
                                 <!-- need JS to redirect no matter what -->

@@ -34,30 +34,29 @@
                     <div class="form-group">
                         <label for="Email">Email</label>
                         <input type="email" class="form-control" id=newEmail name="username"
-                            placeholder="Email@email.com" required>
+                            placeholder="Email@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
-                        <input type="password" class="form-control" id=newPassword name="password" placeholder=Password
-                            required>
+                        <input type="password" class="form-control" id=newPassword name="password" placeholder=Password pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                     </div>
                     <div class="form-group">
                         <label for="Full Name">Full Name</label>
                         <input type="text" class="form-control" id=newName name="name" placeholder="John Smith"
-                            required>
+                            required pattern="[^\\]+">
                     </div>
                     <div class="form-group">
                         <label for="Address 1">Address 1</label>
                         <input type="text" class="form-control" id=addressOne name="addressone"
-                            placeholder="1234 Your Street" required>
+                            placeholder="1234 Your Street" required pattern="[^\\]+">
                     </div>
                     <div class="form-group">
                         <label for="Address 2">Address 2</label>
-                        <input type="text" class="form-control" id=addressTwo name="addresstwo" placeholder="Apt. #567">
+                        <input type="text" class="form-control" id=addressTwo name="addresstwo" placeholder="Apt. #567" pattern="[^\\]+">
                     </div>
                     <span class="form-group">
                         <label for="City">City</label>
-                        <input type="text" class="form-control" id=city name="city" placeholder="Townsville" required>
+                        <input type="text" class="form-control" id=city name="city" placeholder="Townsville" required pattern="[^\\]+">
                     </span>
                     <span class="form-group">
                         <label for="State">State</label>
@@ -69,6 +68,7 @@
                     </span>
                     <div><br></div>
                     <button type="submit" class="btn btn-dark">Submit</button>
+                    <!-- Need to redirect to home page with new user -->
                 </form>
             </div>
             <div class="col-md-6 col-12">
