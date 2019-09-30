@@ -8,7 +8,11 @@ fetch("http://localhost:8080/project-1/users/current")
 .then((thisJson)=>{
     let Json = thisJson;
 
+<<<<<<< HEAD
+    if(Json.managerStatus === true) {
+=======
     if(thisJson.managerStatus === true) {
+>>>>>>> c3bf39a796dca60dbe0c87a4bacd5a3eba406dcf
         var navbarone = document.createElement("li");
         navbarone.setAttribute("class", "nav-item");
         var navbaronelink = document.createElement("a");

@@ -1,6 +1,6 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/reimbursements/resolved")
+fetch("http://localhost:8080/project-1/reimbursements/pending")
 .then((response)=>{
     console.log(response);
     return response.json();
@@ -15,7 +15,6 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved")
             var tabledataAmount = document.createElement("td");
             tabledataAmount.innerText = Json[i].dollarAmount;
             var tabledataRec = document.createElement("td");
-            var tabledataResolved = document.createElement("td");
             
             var recLink = document.createElement("a");
             recLink.setAttribute("class", "nav-link");
@@ -28,16 +27,9 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved")
                 recLink.disabled = true;
             }
             tabledataRec.appendChild(recLink);
-
-            if(Json[i].approved = true) {
-                tabledataResolved.innerText = "Approved";
-            } else {
-                tabledataResolved.innerText = "Denied";
-            }
             
             tablerow.appendChild(tabledataID);
             tablerow.appendChild(tabledataAmount);
-            tablerow.appendChild(tabledataResolved);
             tablerow.appendChild(tabledataRec);
 
             document.querySelector(".tablebody").appendChild(tablerow);
