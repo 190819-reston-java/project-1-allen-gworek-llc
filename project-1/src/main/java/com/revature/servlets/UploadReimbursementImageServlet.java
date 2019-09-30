@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,7 +17,9 @@ import javax.servlet.http.Part;
 
 import org.apache.commons.io.FileUtils;
 
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
@@ -60,8 +63,15 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		File uploadImageFile = new File(submittedFileName);
 
 		FileUtils.copyInputStreamToFile(fileContent, uploadImageFile);
-		BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAII5YOMVBWEUT2KQQ",
-				"dJQIPfvOr71o6RLJQMU5mG3mxlyudd54twrIMBi3");
+
+		Properties props = new Properties();
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		props.load(loader.getResourceAsStream("credentials.properties"));
+		
+		String AWSKey = props.getProperty("AWSAccessKeyId");
+		String AWSKeySecret = props.getProperty("AWSSecretKey");
+		BasicAWSCredentials credentials = new BasicAWSCredentials(AWSKey, AWSKeySecret);
+		
 		AmazonS3 s3client = new AmazonS3Client(credentials);
 
 		String userID = String.valueOf(currentUser.getId());
