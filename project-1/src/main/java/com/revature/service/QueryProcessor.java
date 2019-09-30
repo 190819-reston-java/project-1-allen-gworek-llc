@@ -41,7 +41,7 @@ public abstract class QueryProcessor {
 				insertionValues.append(tableValue);
 			} else {
 				insertionValues.append("'");
-				insertionValues.append(tableValue);
+				insertionValues.append(delimitThisString(tableValue));
 				insertionValues.append("'");
 			}
 
@@ -52,6 +52,8 @@ public abstract class QueryProcessor {
 		columnNames.delete(columnNames.length() - 2, columnNames.length());
 
 		insertQuery = insertQuery.replaceAll("insertionValues", insertionValues.toString());
+		System.out.println("Value of insertionValues before replacing: " + insertionValues);
+		System.out.println("Query before replacing columnNames: " + insertQuery);
 		return insertQuery.replaceFirst("columnNames", columnNames.toString());
 	}
 
@@ -76,7 +78,7 @@ public abstract class QueryProcessor {
 					updateConditions.append(t.toString());
 				} else {
 					updateConditions.append("'");
-					updateConditions.append(t);
+					updateConditions.append(delimitThisString((String)t));
 					updateConditions.append("'");
 				}
 
@@ -113,7 +115,7 @@ public abstract class QueryProcessor {
 					searchConditions.append(t.toString());
 				} else {
 					searchConditions.append("'");
-					searchConditions.append(t);
+					searchConditions.append(delimitThisString((String)t));
 					searchConditions.append("'");
 				}
 
@@ -151,7 +153,7 @@ public abstract class QueryProcessor {
 				searchConditions.append(tableValue);
 			} else {
 				searchConditions.append("'");
-				searchConditions.append(tableValue);
+				searchConditions.append(delimitThisString(tableValue));
 				searchConditions.append("'");
 			}
 
@@ -183,7 +185,7 @@ public abstract class QueryProcessor {
 					updateValues.append(t.toString());
 				} else {
 					updateValues.append("'");
-					updateValues.append(t);
+					updateValues.append(delimitThisString((String)t));
 					updateValues.append("'");
 				}
 
@@ -231,7 +233,7 @@ public abstract class QueryProcessor {
 				updateValues.append(tableValue);
 			} else {
 				updateValues.append("'");
-				updateValues.append(tableValue);
+				updateValues.append(delimitThisString(tableValue));
 				updateValues.append("'");
 			}
 
@@ -362,5 +364,10 @@ public abstract class QueryProcessor {
 		}
 
 		return createdReimbursement;
+	}
+	
+	private static String delimitThisString(String stringToDelimit) {
+		return stringToDelimit.replaceAll("'", "''");
+	
 	}
 }

@@ -30,6 +30,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/JAG/Google Drive/Synced Files/jar_files/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chris/Downloads/junit-4.12.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
