@@ -1,13 +1,23 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.exception.UnmatchableTypesException;
+import com.revature.model.Employee;
 import com.revature.model.Reimbursement;
 import com.revature.repository.DatabaseConnection;
 import com.revature.service.JSONToObject;
@@ -18,37 +28,91 @@ public class ReimbursementResolverServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String JSONOfTargetReimbursement = req.getParameter("targetReimbursementJSON");
+
+		String targetReimbursementID = req.getParameter("targetReimbursementID");
 		int managerID = Integer.valueOf(req.getParameter("employeeID"));
 		String resolveAction = req.getParameter("resolveAction");
-		
-		Reimbursement updateReimbursement = JSONToObject.convertReimbursementJSONtoObject(JSONOfTargetReimbursement);
-		Reimbursement reimbursementToSearchFor = JSONToObject.convertReimbursementJSONtoObject(JSONOfTargetReimbursement);
-		
-		boolean approvalStatus;
-		if(resolveAction.equals("Approved")) {
-			approvalStatus = true;
+		Employee targetEmployee = new Employee();
+		Reimbursement updateReimbursement = new Reimbursement();
+		Reimbursement reimbursementToSearchFor = new Reimbursement();
+
+		DatabaseConnection dbc = new DatabaseConnection();
+
+		try {
+			ResultSet targetReimbursementResults = dbc
+					.executeQueryInDatabase("SELECT * FROM reimbursements WHERE id = " + targetReimbursementID);
+			targetReimbursementResults.next();
+
+			updateReimbursement = QueryProcessor.createReimbursementFromQueryResults(targetReimbursementResults);
+			reimbursementToSearchFor = QueryProcessor.createReimbursementFromQueryResults(targetReimbursementResults);
+
+			ResultSet targetEmployeeResults = dbc.executeQueryInDatabase(
+					"SELECT * FROM employees WHERE id = " + updateReimbursement.getRequestedBy());
+
+			targetEmployeeResults.next();
+
+			targetEmployee = QueryProcessor.createEmployeeFromQueryResults(targetEmployeeResults);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
+
+		boolean approvalStatus;
+		if (resolveAction.equals("Approved")) {
+			approvalStatus = true;
+		} else {
 			approvalStatus = false;
 		}
-		
+
 		updateReimbursement.setResolvedBy(managerID);
 		updateReimbursement.setApproved(approvalStatus);
-		
-		
+
 		String updateQuery;
 		try {
 			updateQuery = QueryProcessor.createUpdateToMatchOther(reimbursementToSearchFor, updateReimbursement);
 			updateQuery = QueryProcessor.specifyTable(updateQuery, "reimbursements");
-			
-			DatabaseConnection dbc = new DatabaseConnection();
-			
+
 			dbc.executeQueryInDatabase(updateQuery);
 		} catch (UnmatchableTypesException | IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		Properties props = System.getProperties();
+
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+
+		final String username = "revatureallengworekllc@gmail.com";
+		final String password = "dummyPassword";
+
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(username, password);
+			}
+		});
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("revatureallengworekllc@gmail.com"));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(targetEmployee.getEmail()));
+			message.setSubject("Your reimbursement request has been resolved!");
+			message.setText("Hello, " + targetEmployee.getFullName() + ",\n"
+					+ "One of your reimbursements has been resolved! Please check the website for more details!" + "\n"
+					+ "Allen-Gworek LLC.");
+
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

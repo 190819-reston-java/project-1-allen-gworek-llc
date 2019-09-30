@@ -1,6 +1,7 @@
 #Connection creds:
 connection.properties
 credentials.properties
+project-1/target/m2e-wtp/web-resources/META-INF/maven/com.revature/project-1/pom.properties
 
 # Created by https://www.gitignore.io/api/java,maven,eclipse,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=java,maven,eclipse,visualstudiocode
