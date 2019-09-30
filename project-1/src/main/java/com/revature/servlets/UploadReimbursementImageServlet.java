@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,6 +27,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.revature.model.Employee;
 import com.revature.repository.DatabaseConnection;
 import com.revature.service.JSONToObject;
+import com.revature.service.QueryProcessor;
 
 @MultipartConfig
 public class UploadReimbursementImageServlet extends HttpServlet {
@@ -37,7 +40,17 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		DatabaseConnection dbc = new DatabaseConnection();
 		Employee currentUser = JSONToObject
 				.convertEmployeeJSONToObject((String) req.getSession().getAttribute("currentUser"));
-		String currentReimbursementID = (String) req.getAttribute("currentReimbursementID");
+
+		ResultSet targetReimbursementResults = dbc.executeQueryInDatabase(
+				"SELECT MAX(id) FROM reimbursements WHERE requestedBy = " + String.valueOf(currentUser.getID()) + ";");
+
+		String currentReimbursementID = "";
+		try {
+			targetReimbursementResults.next();
+			currentReimbursementID = targetReimbursementResults.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		Part submittedFilePart = req.getPart("receipt");
 		String submittedFileName = submittedFilePart.getName();
@@ -45,7 +58,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		InputStream fileContent = submittedFilePart.getInputStream();
 
 		File uploadImageFile = new File(submittedFileName);
-		
+
 		FileUtils.copyInputStreamToFile(fileContent, uploadImageFile);
 		BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAII5YOMVBWEUT2KQQ",
 				"dJQIPfvOr71o6RLJQMU5mG3mxlyudd54twrIMBi3");
@@ -58,9 +71,8 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		createFolder("allen-gworek-llc-image-storage", fileName, s3client);
 
 		fileName += SUFFIX + currentReimbursementID + ".png";
-		s3client.putObject(new PutObjectRequest("allen-gworek-llc-image-storage", fileName,
-				uploadImageFile)
-						.withCannedAcl(CannedAccessControlList.PublicRead));
+		s3client.putObject(new PutObjectRequest("allen-gworek-llc-image-storage", fileName, uploadImageFile)
+				.withCannedAcl(CannedAccessControlList.PublicRead));
 
 		String imageURLForDatabase = "https://allen-gworek-llc-image-storage.s3.amazonaws.com/reimbursementImages/user"
 				+ userID + SUFFIX + currentReimbursementID + ".png";
@@ -69,6 +81,9 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 				+ currentReimbursementID + ";";
 
 		dbc.executeQueryInDatabase(updateQueryForDB);
+		System.out.println(updateQueryForDB);
+
+		resp.sendRedirect("/project-1/pending-reimbursements.html");
 	}
 
 	public static void createFolder(String bucketName, String folderName, AmazonS3 client) {
