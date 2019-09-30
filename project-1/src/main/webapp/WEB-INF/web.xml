@@ -22,7 +22,7 @@
 
 	<servlet>
 		<servlet-name>ReturnAllEmployees</servlet-name>
-		<servlet-class>com.revature.servlets.ReturnAllEmployesServlet</servlet-class>
+		<servlet-class>com.revature.servlets.ReturnAllEmployeesServlet</servlet-class>
 	</servlet>
 
 	<servlet>
