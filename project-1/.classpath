@@ -25,15 +25,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chris/Desktop/spring-tool-suite-3.9.9.RELEASE-e4.12.0-win32-x86_64/sts-bundle/sts-3.9.9.RELEASE/plugins/org.junit_4.12.0.v201504281640/junit.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://junit.org/junit4/javadoc/latest/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/JAG/Google Drive/Synced Files/jar_files/junit-4.12.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
