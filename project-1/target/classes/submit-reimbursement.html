@@ -57,24 +57,26 @@
                 </div>
             </nav>
             <main class="col-xl-10 col-sm-12 col-md-12 ml-sm-auto col-12">
-                <form action="/project-1/reimbursements/image" method="POST" enctype="multipart/form-data">
+                <form action="/project-1/reimbursements/create" method="POST">
                     <br>            
                     <div class="form-group">
-                                    <h2>Submit Receipt
+                                    <h2>Submit Reimbursement
                                         <br>
                                     </h2>
                                 </div>
-                                <!-- amount number -->
                                 <div class="form-group">
-                                    <label for="ReimbursementImage">Receipt Image</label>
-                                    <input type="file" class="form-control" id=newReceipt name="receipt" accept=".jpeg, .png, .pdf">
+                                    <label for="dollarAmount">Reimbursement Amount</label>
+                                    <input type="number" class="form-control" id=newAmount name="amount" placeholder="1234.99" min="0.01" step="0.01" pattern="[^\\]+" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reimbursementSource">Description</label>
+                                    <input type="text" class="form-control" id=newDescription name="description" placeholder="Jon's Tuba Lessons" pattern="[^\\]+" required>
                                 </div>
                                 
                                 <div><br></div>
                                 <button type="submit" class="btn btn-dark">Submit</button>
                                 <!-- need JS to redirect no matter what -->
                             </form>
-                </form>
             </main>
         </div>
     </div>

@@ -6,9 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.FileUtils;
 
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
@@ -16,11 +20,13 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PartSummary;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.revature.model.Employee;
 import com.revature.repository.DatabaseConnection;
 import com.revature.service.JSONToObject;
 
+@MultipartConfig
 public class UploadReimbursementImageServlet extends HttpServlet {
 
 	private static final String SUFFIX = "/";
@@ -33,6 +39,14 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 				.convertEmployeeJSONToObject((String) req.getSession().getAttribute("currentUser"));
 		String currentReimbursementID = (String) req.getAttribute("currentReimbursementID");
 
+		Part submittedFilePart = req.getPart("receipt");
+		String submittedFileName = submittedFilePart.getName();
+
+		InputStream fileContent = submittedFilePart.getInputStream();
+
+		File uploadImageFile = new File(submittedFileName);
+		
+		FileUtils.copyInputStreamToFile(fileContent, uploadImageFile);
 		BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAII5YOMVBWEUT2KQQ",
 				"dJQIPfvOr71o6RLJQMU5mG3mxlyudd54twrIMBi3");
 		AmazonS3 s3client = new AmazonS3Client(credentials);
@@ -45,7 +59,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 
 		fileName += SUFFIX + currentReimbursementID + ".png";
 		s3client.putObject(new PutObjectRequest("allen-gworek-llc-image-storage", fileName,
-				new File("C:\\Users\\chris\\Pictures\\JenkinsMeme.png"))
+				uploadImageFile)
 						.withCannedAcl(CannedAccessControlList.PublicRead));
 
 		String imageURLForDatabase = "https://allen-gworek-llc-image-storage.s3.amazonaws.com/reimbursementImages/user"
@@ -53,7 +67,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 
 		String updateQueryForDB = "UPDATE reimbursements SET imageURL = '" + imageURLForDatabase + "' WHERE id = "
 				+ currentReimbursementID + ";";
-		
+
 		dbc.executeQueryInDatabase(updateQueryForDB);
 	}
 
