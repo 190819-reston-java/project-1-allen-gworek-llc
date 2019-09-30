@@ -94,11 +94,6 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>NullCurrentUserProtection</servlet-name>
-		<servlet-class>com.revature.servlets.NullCurrentUserProtectionServlet</servlet-class>
-	</servlet>
-
-	<servlet>
 		<servlet-name>UploadImage</servlet-name>
 		<servlet-class>com.revature.servlets.UploadReimbursementImageServlet</servlet-class>
 	</servlet>
@@ -106,11 +101,6 @@
 	<servlet-mapping>
 		<servlet-name>UploadImage</servlet-name>
 		<url-pattern>/reimbursements/image</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>NullCurrentUserProtection</servlet-name>
-		<url-pattern>/project-1/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
