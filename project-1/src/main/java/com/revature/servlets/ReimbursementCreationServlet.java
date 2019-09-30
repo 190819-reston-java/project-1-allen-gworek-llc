@@ -21,7 +21,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		int employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser")).getID();
+		int employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser")).getId();
 		
 		Enumeration<String> passedInParameters = req.getParameterNames();
 
@@ -29,11 +29,15 @@ public class ReimbursementCreationServlet extends HttpServlet {
 		String currentAttribute;
 
 		Field currentField;
-
+		
 		while (passedInParameters.hasMoreElements()) {
+			System.out.println("Iterating through parameters");
+
+			currentAttribute = passedInParameters.nextElement();
+			System.out.println(currentAttribute);
 			try {
-				currentAttribute = passedInParameters.nextElement();
 				currentField = createdReimbursement.getClass().getDeclaredField(currentAttribute);
+				System.out.println(currentField.getName());
 
 				try {
 					currentField.setAccessible(true);
@@ -46,6 +50,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			} catch (NoSuchFieldException e) {
+				System.out.println("The field wasn't found!");
 				continue;
 			}
 		}
@@ -60,7 +65,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 			queryToInsertReimbursement = QueryProcessor.specifyTable(queryToInsertReimbursement, "reimbursements");
 			
 			dbc.executeQueryInDatabase(queryToInsertReimbursement);
-			
+			System.out.println(queryToInsertReimbursement);
 			resp.sendRedirect("/project-1/submit-reimbursement-image.html");
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
