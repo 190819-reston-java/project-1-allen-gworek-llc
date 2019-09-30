@@ -97,6 +97,16 @@
 		<servlet-name>UploadImage</servlet-name>
 		<servlet-class>com.revature.servlets.UploadReimbursementImageServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>ViewTargetEmployee</servlet-name>
+		<servlet-class>com.revature.servlets.ViewTargetEmployeeServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ViewTargetEmployee</servlet-name>
+		<url-pattern>/employees/view/target</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>UploadImage</servlet-name>
