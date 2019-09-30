@@ -35,7 +35,7 @@ public class ReturnAllEmployeesServlet extends HttpServlet {
 				allEmployeeList.add(QueryProcessor.createEmployeeFromQueryResults(allEmployees));
 				}
 				PrintWriter pw = resp.getWriter();
-				pw.write(ObjectToJSON.convertObjectToJSON(allEmployees));
+				pw.write(ObjectToJSON.convertObjectToJSON(allEmployeeList));
 			} catch (IllegalArgumentException | IllegalAccessException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

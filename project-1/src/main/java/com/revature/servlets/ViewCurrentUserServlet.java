@@ -22,8 +22,13 @@ public class ViewCurrentUserServlet extends HttpServlet {
 
 		PrintWriter pw = resp.getWriter();
 		
-		String currentUser = (String)req.getSession().getAttribute("currentUser");
+		if(req.getSession().getAttribute("currentUser") == null) {
+			pw.write("[]");
+		}
+		else {
+			String currentUser = (String)req.getSession().getAttribute("currentUser");
 
-		pw.write(currentUser);
+			pw.write(currentUser);
+		}
 	}
 }
