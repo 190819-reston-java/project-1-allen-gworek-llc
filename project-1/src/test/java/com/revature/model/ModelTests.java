@@ -19,7 +19,7 @@ public class ModelTests {
 	
 	@Before
 	public void setUp() throws Exception {
-		newEmployee = new Employee(1, "Full Name", "Job Title", "Address", "Email", "Password", false);
+		newEmployee = new Employee("Full Name", "Job Title", "Address", "Email", "Password", false);
 		newReimbursement = new Reimbursement(1, "Reimbursement Source", 1, 2);
 		newEmployeeList = new EmployeeList(newEmployee, newEmployee, newEmployee, newEmployee);
 		newReimbursementList = new ReimbursementList(newReimbursement, newReimbursement, newReimbursement, newReimbursement);
@@ -37,7 +37,7 @@ public class ModelTests {
 	@Test
 	public void employeeObjectTest() {
 		
-		assertEquals(1, newEmployee.getID());
+		assertEquals(1, newEmployee.getId());
 		assertEquals("Full Name", newEmployee.getFullName());
 		assertEquals("Job Title", newEmployee.getJobTitle());
 		assertEquals("Address", newEmployee.getAddress());

@@ -30,7 +30,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 		String currentAttribute;
 		Field currentField;
 
-		updatedEmployeeValues.setID(currentEmployee.getID());
+		updatedEmployeeValues.setId(currentEmployee.getId());
 		updatedEmployeeValues.setManagerStatus(currentEmployee.isManagerStatus());
 
 		while (passedInParameters.hasMoreElements()) {
@@ -78,7 +78,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 			dbc.executeQueryInDatabase(updateQuery);
 
 			try {
-				String retrieveCurrentUserQuery = "SELECT * FROM employees WHERE id = " + currentEmployee.getID() + ";";
+				String retrieveCurrentUserQuery = "SELECT * FROM employees WHERE id = " + currentEmployee.getId() + ";";
 				ResultSet currentUserResults = dbc.executeQueryInDatabase(retrieveCurrentUserQuery);
 				currentUserResults.next();
 

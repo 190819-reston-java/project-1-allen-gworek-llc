@@ -21,7 +21,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		int employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser")).getID();
+		int employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser")).getId();
 		
 		Enumeration<String> passedInParameters = req.getParameterNames();
 

@@ -11,13 +11,17 @@ public class Employee implements Comparable<Employee>, AppUsable {
 	private String email;
 	private String userPassword;
 	private boolean managerStatus;
+	private String addressTwo;
+	private String city;
+	private String state;
+	private String zip;
 
 	public Employee() {
-		this(-1, "", "", "", "", "", false);
+		this(-1, "", "", "", "", "", false, "", "", "", "");
 	}
 	
 	public Employee(int ID, String fullName, String jobTitle, String address, String email, String password,
-			boolean managerStatus) {
+			boolean managerStatus, String addressTwo, String city, String state, String zip) {
 		this.id = ID;
 		this.fullName = fullName;
 		this.jobTitle = jobTitle;
@@ -25,24 +29,24 @@ public class Employee implements Comparable<Employee>, AppUsable {
 		this.email = email;
 		this.userPassword = password;
 		this.managerStatus = managerStatus;
+		this.addressTwo = addressTwo;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
 	}
 
 	public Employee(String fullName, String jobTitle, String address, String email, String password,
-			boolean managerStatus) {
+			boolean managerStatus, String addressTwo, String city, String state, String zip) {
 		
-		this(-1, fullName, jobTitle, address, email, password, managerStatus);
+		this(-1, fullName, jobTitle, address, email, password, managerStatus, addressTwo, city, state, zip);
 	}
 	
 	public Employee(String fullName) {
-		this(fullName, "", "", "", "", false);
+		this(fullName, "", "", "", "", false, "", "", "", "");
 	}
 	
-	public int getID() {
-		return this.id;
-	}
-
-	public void setID(int ID) {
-		this.id = ID;
+	public Employee(String something, String other, String another, String yetAnother, String oneLast, boolean boole) {
+		this();
 	}
 
 	public String getFullName() {
@@ -91,6 +95,46 @@ public class Employee implements Comparable<Employee>, AppUsable {
 	
 	public void setManagerStatus(boolean managerStatus) {
 		this.managerStatus = managerStatus;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAddressTwo() {
+		return addressTwo;
+	}
+
+	public void setAddressTwo(String addressTwo) {
+		this.addressTwo = addressTwo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 
 	public int compareTo(Employee other) {

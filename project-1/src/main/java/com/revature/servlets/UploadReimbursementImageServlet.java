@@ -42,7 +42,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 				.convertEmployeeJSONToObject((String) req.getSession().getAttribute("currentUser"));
 
 		ResultSet targetReimbursementResults = dbc.executeQueryInDatabase(
-				"SELECT MAX(id) FROM reimbursements WHERE requestedBy = " + String.valueOf(currentUser.getID()) + ";");
+				"SELECT MAX(id) FROM reimbursements WHERE requestedBy = " + String.valueOf(currentUser.getId()) + ";");
 
 		String currentReimbursementID = "";
 		try {
@@ -64,7 +64,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 				"dJQIPfvOr71o6RLJQMU5mG3mxlyudd54twrIMBi3");
 		AmazonS3 s3client = new AmazonS3Client(credentials);
 
-		String userID = String.valueOf(currentUser.getID());
+		String userID = String.valueOf(currentUser.getId());
 
 		String fileName = "reimbursementImages" + SUFFIX + "user" + userID;
 
