@@ -26,6 +26,7 @@ public class ViewTargetEmployeeReimbursementsServlet extends HttpServlet {
 		
 		String findReimbursementsByRequestID = QueryProcessor.createSelectQuery("requestedBy", valueToSearch);
 		findReimbursementsByRequestID = QueryProcessor.specifyTable(findReimbursementsByRequestID, "reimbursements");
+		findReimbursementsByRequestID += "ORDER BY id";
 		
 		ResultSet allReimbursementsByRequestID =  dbc.executeQueryInDatabase(findReimbursementsByRequestID);
 		

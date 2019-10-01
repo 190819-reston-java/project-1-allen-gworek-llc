@@ -44,6 +44,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		Employee currentUser = JSONToObject
 				.convertEmployeeJSONToObject((String) req.getSession().getAttribute("currentUser"));
 
+		
 		ResultSet targetReimbursementResults = dbc.executeQueryInDatabase(
 				"SELECT MAX(id) FROM reimbursements WHERE requestedBy = " + String.valueOf(currentUser.getId()) + ";");
 

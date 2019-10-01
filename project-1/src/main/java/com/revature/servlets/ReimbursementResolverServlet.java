@@ -33,6 +33,12 @@ public class ReimbursementResolverServlet extends HttpServlet {
 		System.out.println("In Reimbursement Resolver Servlet");
 		
 		Employee currentManager = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
+	
+
+		if(!currentManager.isManagerStatus()) {
+			resp.sendRedirect("/project-1/homepage.html");
+			return;
+		}
 		
 		System.out.println("Created current employee");
 		int managerID = currentManager.getId();

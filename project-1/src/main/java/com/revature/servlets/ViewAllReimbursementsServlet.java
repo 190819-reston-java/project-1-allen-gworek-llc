@@ -22,7 +22,7 @@ public class ViewAllReimbursementsServlet extends HttpServlet {
 
 		DatabaseConnection dbc = new DatabaseConnection();
 
-		ResultSet allReimbursements = dbc.executeQueryInDatabase("SELECT * FROM reimbursements;");
+		ResultSet allReimbursements = dbc.executeQueryInDatabase("SELECT * FROM reimbursements ORDER BY id;");
 
 		ReimbursementList allReimbursementsList = new ReimbursementList();
 

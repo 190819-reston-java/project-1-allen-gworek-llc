@@ -26,7 +26,7 @@ public class ReturnAllEmployeesServlet extends HttpServlet {
 
 		DatabaseConnection dbc = new DatabaseConnection();
 
-		ResultSet allEmployees = dbc.executeQueryInDatabase("SELECT * FROM employees;");
+		ResultSet allEmployees = dbc.executeQueryInDatabase("SELECT * FROM employees ORDER BY id;");
 		
 		EmployeeList allEmployeeList = new EmployeeList();
 			

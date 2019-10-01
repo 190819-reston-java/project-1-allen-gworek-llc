@@ -22,7 +22,7 @@ public class ViewAllResolvedReimbursementsServlet extends HttpServlet {
 
 		DatabaseConnection dbc = new DatabaseConnection();
 
-		String queryForAllResolved = "SELECT * FROM reimbursements WHERE resolvedBy IS NOT NULL;";
+		String queryForAllResolved = "SELECT * FROM reimbursements WHERE resolvedBy IS NOT NULL ORDER BY id;";
 
 		ResultSet allResolvedReimbursementsResults = dbc.executeQueryInDatabase(queryForAllResolved);
 

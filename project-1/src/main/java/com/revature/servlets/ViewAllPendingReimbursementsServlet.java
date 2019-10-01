@@ -22,7 +22,7 @@ public class ViewAllPendingReimbursementsServlet extends HttpServlet {
 
 		DatabaseConnection dbc = new DatabaseConnection();
 
-		String queryForAllPending = "SELECT * FROM reimbursements WHERE resolvedBy IS NULL;";
+		String queryForAllPending = "SELECT * FROM reimbursements WHERE resolvedBy IS NULL ORDER BY id;";
 
 		ResultSet allPendingReimbursementsResults = dbc.executeQueryInDatabase(queryForAllPending);
 

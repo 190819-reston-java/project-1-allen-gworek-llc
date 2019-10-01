@@ -28,7 +28,7 @@ public class ViewPendingReimbursementsServlet extends HttpServlet {
 		Employee currentEmployee = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
 		String employeeID = String.valueOf(currentEmployee.getId());
 
-		String findEmployeePendingReimbursements = "SELECT * FROM reimbursements WHERE requestedBy = employeeID AND resolvedBy IS NULL;";
+		String findEmployeePendingReimbursements = "SELECT * FROM reimbursements WHERE requestedBy = employeeID AND resolvedBy IS NULL ORDER BY ID;";
 		findEmployeePendingReimbursements = findEmployeePendingReimbursements.replaceAll("employeeID", employeeID);
 		
 		ResultSet pendingReimbursements = dbc.executeQueryInDatabase(findEmployeePendingReimbursements);

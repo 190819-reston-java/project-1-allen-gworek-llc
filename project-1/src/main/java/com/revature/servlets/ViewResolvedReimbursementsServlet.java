@@ -27,8 +27,9 @@ public class ViewResolvedReimbursementsServlet extends HttpServlet {
 		Employee currentEmployee = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
 		String employeeID = String.valueOf(currentEmployee.getId());
 
-		String getResolvedReimbursementsForEmployee = "SELECT * FROM reimbursements WHERE idSearch AND resolvedBy IS NOT NULL;";
+		String getResolvedReimbursementsForEmployee = "SELECT * FROM reimbursements WHERE idSearch AND resolvedBy IS NOT NULL ORDER BY id;";
 		getResolvedReimbursementsForEmployee = getResolvedReimbursementsForEmployee.replaceAll("idSearch", "requestedBy = " + employeeID);
+	
 		
 		ResultSet resolvedReimbursements = dbc.executeQueryInDatabase(getResolvedReimbursementsForEmployee);
 		
