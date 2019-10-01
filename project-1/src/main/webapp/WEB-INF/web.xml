@@ -157,7 +157,7 @@
 
 	<servlet-mapping>
 		<servlet-name>ViewTargetReimbursements</servlet-name>
-		<url-pattern>/employees/view/target/reimbursements</url-pattern>
+		<url-pattern>/reimbursements/view/target/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

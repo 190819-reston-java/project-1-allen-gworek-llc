@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.model.Employee;
 import com.revature.model.Reimbursement;
 import com.revature.model.ReimbursementList;
 import com.revature.repository.DatabaseConnection;
@@ -20,32 +21,25 @@ public class ViewTargetEmployeeReimbursementsServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		DatabaseConnection dbc = new DatabaseConnection();
-		
-		int valueToSearch = Integer.valueOf(req.getParameter("requestedBy"));
-		
-		String findReimbursementsByRequestID = QueryProcessor.createSelectQuery("requestedBy", valueToSearch);
-		findReimbursementsByRequestID = QueryProcessor.specifyTable(findReimbursementsByRequestID, "reimbursements");
-		findReimbursementsByRequestID += "ORDER BY id";
-		
-		ResultSet allReimbursementsByRequestID =  dbc.executeQueryInDatabase(findReimbursementsByRequestID);
-		
-		ReimbursementList allReimbursementsList = new ReimbursementList();
+
+		String[] thisPath = req.getPathInfo().split("/");
+		System.out.println(thisPath[1]);
+
+		ResultSet targetEmployeeReimbursementsByID = dbc
+				.executeQueryInDatabase("SELECT * FROM reimbursements WHERE requestedBy = " + thisPath[thisPath.length - 1]);
+
 		try {
-			while(allReimbursementsByRequestID.next()) {
-				Reimbursement newReimbursement = QueryProcessor.createReimbursementFromQueryResults(allReimbursementsByRequestID);
-				allReimbursementsList.add(newReimbursement);
+
+			ReimbursementList allTargetReimbursements = new ReimbursementList();
+			Reimbursement targetReimbursement;
+			while (targetEmployeeReimbursementsByID.next()) {
+				targetReimbursement = QueryProcessor.createReimbursementFromQueryResults(targetEmployeeReimbursementsByID);
+				allTargetReimbursements.add(targetReimbursement);
 			}
-			
-			PrintWriter pw = resp.getWriter();
-			pw.write(ObjectToJSON.convertObjectToJSON(allReimbursementsList));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+			resp.getWriter().write(ObjectToJSON.convertObjectToJSON(allTargetReimbursements).toString());
+		} catch (IllegalArgumentException | IllegalAccessException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
