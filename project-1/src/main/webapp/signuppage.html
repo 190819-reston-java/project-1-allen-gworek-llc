@@ -5,21 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="template.css">
     <title>Home</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="loginpage.html"><img class="navbar-logo" src="logo.png"
-                alt="Logo">&nbsp; Allen-Gworek LLC.</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="loginpage.html"><img class="navbar-logo" src="logo.png" alt="Logo">&nbsp; Allen-Gworek LLC.</a>
         <a class="navbar w-100" type="text"></a>
         <ul class="navbar-nav px-3 text-nowrap">
             <li class="nav-item">
                 <form name="SignOut" action="/project-1/signout" method="GET">
-                <button class="btn btn-dark">Sign Out</button>
+                    <button class="btn btn-dark">Sign Out</button>
                 </form>
             </li>
         </ul>
@@ -35,8 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="Email">Email</label>
-                        <input type="email" class="form-control" id=newEmail name="email"
-                            placeholder="Email@email.com" required>
+                        <input type="email" class="form-control" id=newEmail name="email" placeholder="Email@email.com" required>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
@@ -44,18 +41,15 @@
                     </div>
                     <div class="form-group">
                         <label for="Full Name">Full Name</label>
-                        <input type="text" class="form-control" id=newName name="fullName" placeholder="John Smith"
-                            required pattern="[^\\]+">
+                        <input type="text" class="form-control" id=newName name="fullName" placeholder="John Smith" required pattern="[^\\]+">
                     </div>
                     <div class="form-group">
                         <label for="Job Title">Job Title</label>
-                        <input type="text" class="form-control" id=newJobTitle name="jobTitle" placeholder="Software Developer"
-                           pattern="[^\\]+" value="Employee" required>
+                        <input type="text" class="form-control" id=newJobTitle name="jobTitle" placeholder="Software Developer" pattern="[^\\]+" value="Employee" required>
                     </div>
                     <div class="form-group">
                         <label for="Address 1">Address 1</label>
-                        <input type="text" class="form-control" id=addressOne name="address"
-                            placeholder="1234 Your Street" required pattern="[^\\]+">
+                        <input type="text" class="form-control" id=addressOne name="address" placeholder="1234 Your Street" required pattern="[^\\]+">
                     </div>
                     <div class="form-group">
                         <label for="Address 2">Address 2</label>
@@ -73,9 +67,12 @@
                         <label for="Zipcode">Zipcode</label>
                         <input type="text" class="form-control" id=zip name="zip" placeholder="12345" pattern="[0-9]{5}" required>
                     </span>
+                    <div class="form-group">
+                        <label for="Manager Code">Manager Code</label>
+                        <input type="text" class="form-control" id="managercode" name="managerCode">
+                    </div>
                     <div><br></div>
                     <button type="submit" class="btn btn-dark">Submit</button>
-                    <!-- Need to redirect to home page with new user -->
                 </form>
             </div>
             <div class="col-md-6 col-12">

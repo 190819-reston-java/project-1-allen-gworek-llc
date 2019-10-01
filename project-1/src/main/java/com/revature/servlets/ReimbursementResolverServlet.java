@@ -3,6 +3,7 @@ package com.revature.servlets;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -29,9 +30,28 @@ public class ReimbursementResolverServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String targetReimbursementID = req.getParameter("targetReimbursementID");
-		int managerID = Integer.valueOf(req.getParameter("employeeID"));
-		String resolveAction = req.getParameter("resolveAction");
+		System.out.println("In Reimbursement Resolver Servlet");
+		
+		Employee currentManager = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
+		
+		System.out.println("Created current employee");
+		int managerID = currentManager.getId();
+		
+		Enumeration<String>allParams = req.getParameterNames();
+		while(allParams.hasMoreElements()) {
+			System.out.println(
+					allParams.nextElement());
+		}
+		String resolveAction = req.getParameter("updatereimbursement");
+		String[] resolveActionFormat = resolveAction.split(" ");
+		
+		for(String action : resolveActionFormat) {
+			System.out.println(action);
+		}
+		
+		int targetReimbursementID = Integer.valueOf(resolveActionFormat[0]);
+		
+		
 		Employee targetEmployee = new Employee();
 		Reimbursement updateReimbursement = new Reimbursement();
 		Reimbursement reimbursementToSearchFor = new Reimbursement();
@@ -60,7 +80,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 		}
 
 		boolean approvalStatus;
-		if (resolveAction.equals("Approved")) {
+		if (resolveActionFormat[2].equals("True")) {
 			approvalStatus = true;
 		} else {
 			approvalStatus = false;

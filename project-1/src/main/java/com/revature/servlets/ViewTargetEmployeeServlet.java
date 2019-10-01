@@ -17,11 +17,13 @@ import com.revature.service.QueryProcessor;
 public class ViewTargetEmployeeServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		DatabaseConnection dbc = new DatabaseConnection();
 
+		String[] thisPath = req.getPathInfo().split("/");
+		
 		ResultSet targetEmployeeByID = dbc
-				.executeQueryInDatabase("SELECT * FROM employees WHERE id = " + req.getParameter("targetEmployeeID"));
+				.executeQueryInDatabase("SELECT * FROM employees WHERE id = " + thisPath[1]);
 
 		
 		try {		
