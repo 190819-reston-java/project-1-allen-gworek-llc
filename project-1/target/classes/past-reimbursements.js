@@ -14,6 +14,8 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved")
             tabledataID.innerText = Json[i].id;
             var tabledataAmount = document.createElement("td");
             tabledataAmount.innerText = Json[i].dollarAmount;
+            var tabledataDescription = document.createElement("td");
+            tabledataDescription.innerText = Json[i].reimbursementSource;
             var tabledataRec = document.createElement("td");
             var tabledataResolved = document.createElement("td");
 
@@ -40,6 +42,7 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved")
 
             tablerow.appendChild(tabledataID);
             tablerow.appendChild(tabledataAmount);
+            tablerow.appendChild(tabledataDescription);
             tablerow.appendChild(tabledataResolved);
             tablerow.appendChild(tabledataRec);
 

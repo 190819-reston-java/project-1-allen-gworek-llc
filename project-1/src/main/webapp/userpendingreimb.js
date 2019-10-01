@@ -16,6 +16,9 @@ fetch("http://localhost:8080/project-1/reimbursements/pending")
             tabledataAmount.innerText = Json[i].dollarAmount;
             var tabledataRec = document.createElement("td");
 
+            var tabledataDescription = document.createElement("td");
+            tabledataDescription.innerText = Json[i].reimbursementSource;
+
             var recLink = document.createElement("a");
             recLink.setAttribute("class", "nav-link");
             recLink.setAttribute("target", "_blank");
@@ -33,6 +36,7 @@ fetch("http://localhost:8080/project-1/reimbursements/pending")
 
             tablerow.appendChild(tabledataID);
             tablerow.appendChild(tabledataAmount);
+            tablerow.appendChild(tabledataDescription);
             tablerow.appendChild(tabledataRec);
 
             document.querySelector(".tablebody").appendChild(tablerow);
