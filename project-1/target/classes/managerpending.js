@@ -31,8 +31,7 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             if (Json[i].imgUrl !== undefined) {
                 recLink.innerText = "Receipt";
             } else {
-                //MAKE THIS WORK
-                recLink.disabled = true;
+                recLink.setAttribute("disabled", "");
             }
             tabledataRec.appendChild(recLink);
 
