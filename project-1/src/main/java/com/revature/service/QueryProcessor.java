@@ -262,14 +262,13 @@ public abstract class QueryProcessor {
 		ArrayList<Object> formattedUpdateValuesArray = new ArrayList<Object>();
 
 		for (int index = 0; index < firstTypesAndFields.size(); index++) {
-			
 			if (firstTypesAndFields.get(index).get(0).equals("id")) {
+				
+				formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(0));
+				formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(1));
 				continue;
 			}
 			
-			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(0));
-			formattedUpdateConditionsArray.add(firstTypesAndFields.get(index).get(1));
-
 			formattedUpdateValuesArray.add(firstTypesAndFields.get(index).get(0));
 			formattedUpdateValuesArray.add(otherTypesAndFields.get(index).get(1));
 		}

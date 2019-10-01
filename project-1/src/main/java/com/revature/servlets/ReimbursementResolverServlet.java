@@ -80,7 +80,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 		}
 
 		boolean approvalStatus;
-		if (resolveActionFormat[2].equals("True")) {
+		if (resolveActionFormat[1].equals("True")) {
 			approvalStatus = true;
 		} else {
 			approvalStatus = false;
@@ -94,6 +94,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 			updateQuery = QueryProcessor.createUpdateToMatchOther(reimbursementToSearchFor, updateReimbursement);
 			updateQuery = QueryProcessor.specifyTable(updateQuery, "reimbursements");
 
+			System.out.println(updateQuery);
 			dbc.executeQueryInDatabase(updateQuery);
 		} catch (UnmatchableTypesException | IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
@@ -133,6 +134,8 @@ public class ReimbursementResolverServlet extends HttpServlet {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+		
+		resp.sendRedirect("/project-1/manager-pending-reimbursements.html");
 
 	}
 }
