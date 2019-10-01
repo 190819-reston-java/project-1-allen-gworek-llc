@@ -31,8 +31,10 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             if (Json[i].imgUrl !== undefined) {
                 recLink.innerText = "Receipt";
             } else {
-                recLink.setAttribute("disabled", "");
+                recLink.setAttribute("class", "disabled");
             }
+            document.querySelectorAll(".disabled").disabled = true;
+
             tabledataRec.appendChild(recLink);
 
             if (Json[i].approved = true) {
