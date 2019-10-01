@@ -59,11 +59,11 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             tabledataDecisionSelect.setAttribute("id", "inlineFormCustomSelectPref");
 
             var tabledataDecisionValueTrue = document.createElement("option");
-            tabledataDecisionValueTrue.setAttribute("value", `${Json[i].id}+True`);
+            tabledataDecisionValueTrue.setAttribute("value", `${Json[i].id} True`);
             tabledataDecisionValueTrue.innerText = "Approve";
 
             var tabledataDecisionValueFalse = document.createElement("option");
-            tabledataDecisionValueFalse.setAttribute("value", `${Json[i].id}+False`);
+            tabledataDecisionValueFalse.setAttribute("value", `${Json[i].id} False`);
             tabledataDecisionValueFalse.innerText = "Deny";
 
             var tabledataDecisionBtn = document.createElement("button");
