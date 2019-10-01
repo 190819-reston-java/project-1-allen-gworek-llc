@@ -25,8 +25,7 @@ public class LogInValidationFilter extends MyGenericFilter {
 
 		if (fixedRequest.getSession().getAttribute("currentUser") == null) {
 			for (String urlPiece : currentURLArrayList) {
-				System.out.print(urlPiece + "/");
-				System.out.println();
+				System.out.print(urlPiece);
 			}
 			System.out.println("There is no user in this session!");
 			if (currentURLArrayList.contains("signuppage.html")) {
@@ -35,6 +34,15 @@ public class LogInValidationFilter extends MyGenericFilter {
 				System.out.println("On the login page!");
 			} else if (currentURLArrayList.contains("login")) {
 				System.out.println("On the login servlet!");
+			if (currentURLArrayList.contains("template.css")) {
+				System.out.println("Looking at some css elements!");
+			}
+			if (currentURLArrayList.contains("logo.png")) {
+				System.out.println("Looking at some css elements!");
+			}
+			if (currentURLArrayList.contains("loginpage.js")) {
+				System.out.println("Looking at loginpage js!");
+			}
 			} else {
 				fixedResponse.sendRedirect("/project-1/loginpage.html");
 				return;

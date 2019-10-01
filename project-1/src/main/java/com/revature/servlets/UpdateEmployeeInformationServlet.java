@@ -36,9 +36,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 		while (passedInParameters.hasMoreElements()) {
 			try {
 				currentAttribute = passedInParameters.nextElement();
-				System.out.println(currentAttribute + " is the name of the current attribute");
 				currentField = updatedEmployeeValues.getClass().getDeclaredField(currentAttribute);
-				System.out.println(currentField + " is the name of the current field");
 
 				try {
 					currentField.setAccessible(true);
@@ -88,6 +86,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				resp.sendRedirect("/project-1/change-profile.html");
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 

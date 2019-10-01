@@ -32,7 +32,7 @@
 	
 	<filter-mapping>
 		<filter-name>LoginValidation</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</filter-mapping>
 	
 	<servlet>
@@ -117,81 +117,81 @@
 	
 	<servlet-mapping>
 		<servlet-name>ViewTargetEmployee</servlet-name>
-		<url-pattern>/employees/view/target/*</url-pattern>
+		<url-pattern>/app/employees/view/target/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>UploadImage</servlet-name>
-		<url-pattern>/reimbursements/image</url-pattern>
+		<url-pattern>/app/reimbursements/image</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>SignOut</servlet-name>
-		<url-pattern>/signout</url-pattern>
+		<url-pattern>/app/signout</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewAllResolved</servlet-name>
-		<url-pattern>/reimbursements/resolved/all</url-pattern>
+		<url-pattern>/app/reimbursements/resolved/all</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewAllPending</servlet-name>
-		<url-pattern>/reimbursements/pending/all</url-pattern>
+		<url-pattern>/app/reimbursements/pending/all</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>LogInUser</servlet-name>
-		<url-pattern>/login</url-pattern>
+		<url-pattern>/login/login</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewCurrentUser</servlet-name>
-		<url-pattern>/users/current</url-pattern>
+		<url-pattern>/app/users/current</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewAllReimbursements</servlet-name>
-		<url-pattern>/reimbursements/view/all</url-pattern>
+		<url-pattern>/app/reimbursements/view/all</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewTargetReimbursements</servlet-name>
-		<url-pattern>/reimbursements/view/target/*</url-pattern>
+		<url-pattern>/app/reimbursements/view/target/*</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewResolved</servlet-name>
-		<url-pattern>/reimbursements/resolved</url-pattern>
+		<url-pattern>/app/reimbursements/resolved</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ViewPending</servlet-name>
-		<url-pattern>/reimbursements/pending</url-pattern>
+		<url-pattern>/app/reimbursements/pending</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>UpdateInformation</servlet-name>
-		<url-pattern>/info/update</url-pattern>
+		<url-pattern>/app/info/update</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ReturnAllEmployees</servlet-name>
-		<url-pattern>/employees/view/all</url-pattern>
+		<url-pattern>/app/employees/view/all</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>ResolveReimbursement</servlet-name>
-		<url-pattern>/reimbursements/resolve</url-pattern>
+		<url-pattern>/app/reimbursements/resolve</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>CreateReimbursement</servlet-name>
-		<url-pattern>/reimbursements/create</url-pattern>
+		<url-pattern>/app/reimbursements/create</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Registration</servlet-name>
-		<url-pattern>/register</url-pattern>
+		<url-pattern>/login/register</url-pattern>
 	</servlet-mapping>
 </web-app>
