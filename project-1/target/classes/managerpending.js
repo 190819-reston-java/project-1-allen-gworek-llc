@@ -26,13 +26,15 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
 
             var recLink = document.createElement("a");
             recLink.setAttribute("class", "nav-link");
-            var imageURLText;
-            recLink.setAttribute("href", Json[i].imgURL);
-            if (Json[i].imgUrl !== undefined) {
-                recLink.innerText = "Receipt";
-            } else {
+            recLink.setAttribute("target", "_blank");
+            recLink.setAttribute("href", Json[i].imageURL);
+            recLink.innerText = "Receipt";
+
+            if (Json[i].imageURL === "") {
                 recLink.setAttribute("class", "disabled");
+                recLink.innerText = " ";
             }
+
             document.querySelectorAll(".disabled").disabled = true;
 
             tabledataRec.appendChild(recLink);
@@ -57,11 +59,11 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             tabledataDecisionSelect.setAttribute("id", "inlineFormCustomSelectPref");
 
             var tabledataDecisionValueTrue = document.createElement("option");
-            tabledataDecisionValueTrue.setAttribute("value", `${Json[i].id}+True`);
+            tabledataDecisionValueTrue.setAttribute("value", `${Json[i].id} True`);
             tabledataDecisionValueTrue.innerText = "Approve";
 
             var tabledataDecisionValueFalse = document.createElement("option");
-            tabledataDecisionValueFalse.setAttribute("value", `${Json[i].id}+False`);
+            tabledataDecisionValueFalse.setAttribute("value", `${Json[i].id} False`);
             tabledataDecisionValueFalse.innerText = "Deny";
 
             var tabledataDecisionBtn = document.createElement("button");
