@@ -23,7 +23,7 @@ public class LogInValidationFilter extends MyGenericFilter {
 		String[] currentURLArray = thisURL.split("/");
 		ArrayList<String> currentURLArrayList = new ArrayList<String>(Arrays.asList(currentURLArray));
 		System.out.println(fixedRequest.getSession().getAttribute("currentEmployee"));
-
+		
 		if (fixedRequest.getSession().getAttribute("currentEmployee") == null) {
 			for (String urlPiece : currentURLArrayList) {
 				System.out.print(urlPiece + "/");
