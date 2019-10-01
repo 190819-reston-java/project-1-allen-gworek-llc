@@ -22,9 +22,8 @@ public class LogInValidationFilter extends MyGenericFilter {
 		String thisURL = fixedRequest.getRequestURL().toString();
 		String[] currentURLArray = thisURL.split("/");
 		ArrayList<String> currentURLArrayList = new ArrayList<String>(Arrays.asList(currentURLArray));
-		System.out.println(fixedRequest.getSession().getAttribute("currentEmployee"));
-		
-		if (fixedRequest.getSession().getAttribute("currentEmployee") == null) {
+
+		if (fixedRequest.getSession().getAttribute("currentUser") == null) {
 			for (String urlPiece : currentURLArrayList) {
 				System.out.print(urlPiece + "/");
 				System.out.println();
@@ -32,17 +31,17 @@ public class LogInValidationFilter extends MyGenericFilter {
 			System.out.println("There is no user in this session!");
 			if (currentURLArrayList.contains("signuppage.html")) {
 				System.out.println("On the signup page!");
-			}
-
-			if (currentURLArrayList.contains("loginpage.html")) {
+			} else if (currentURLArrayList.contains("loginpage.html")) {
 				System.out.println("On the login page!");
-			}
-			if (!currentURLArrayList.contains("signuppage.html") & !currentURLArrayList.contains("loginpage.html")) {
+			} else if (currentURLArrayList.contains("login")) {
+				System.out.println("On the login servlet!");
+			} else {
 				fixedResponse.sendRedirect("/project-1/loginpage.html");
+				return;
 			}
+
+			chain.doFilter(request, response);
+
 		}
-
-		chain.doFilter(request, response);
-
 	}
 }

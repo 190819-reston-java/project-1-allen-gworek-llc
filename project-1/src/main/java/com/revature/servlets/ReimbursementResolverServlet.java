@@ -32,7 +32,9 @@ public class ReimbursementResolverServlet extends HttpServlet {
 
 		System.out.println("In Reimbursement Resolver Servlet");
 		
-		Employee currentManager = JSONToObject.convertEmployeeJSONToObject((String)req.getParameter("currentUser"));
+		Employee currentManager = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
+		
+		System.out.println("Created current employee");
 		int managerID = currentManager.getId();
 		
 		Enumeration<String>allParams = req.getParameterNames();
@@ -40,8 +42,8 @@ public class ReimbursementResolverServlet extends HttpServlet {
 			System.out.println(
 					allParams.nextElement());
 		}
-		String resolveAction = req.getParameter("updateReimbursement");
-		String[] resolveActionFormat = resolveAction.split("+");
+		String resolveAction = req.getParameter("updatereimbursement");
+		String[] resolveActionFormat = resolveAction.split(" ");
 		
 		for(String action : resolveActionFormat) {
 			System.out.println(action);
