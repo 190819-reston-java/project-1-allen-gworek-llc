@@ -39,9 +39,12 @@ public class LogInValidationFilter extends MyGenericFilter {
 				fixedResponse.sendRedirect("/project-1/loginpage.html");
 				return;
 			}
-
-			chain.doFilter(request, response);
-
 		}
+
+		else {
+			System.out.println("There is a user in the current session!");
+		}
+		chain.doFilter(request, response);
+
 	}
 }
