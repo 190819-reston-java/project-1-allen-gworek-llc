@@ -35,6 +35,14 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved/all")
             recLink.setAttribute("class", "nav-link");
             recLink.setAttribute("target", "_blank");
             recLink.setAttribute("href", Json[i].imageURL);
+
+            var recLinkImage = document.createElement("img")
+            recLinkImage.setAttribute("src", Json[i].imageURL);
+
+            var recLink
+
+            recLink.appendChild(recLinkImage);
+
             recLink.innerText = "Receipt";
 
             if (Json[i].imageURL === "") {
