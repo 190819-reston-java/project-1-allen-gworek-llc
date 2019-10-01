@@ -30,8 +30,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/chris/Downloads/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/chris/Downloads/activation.jar"/>
-	<classpathentry kind="lib" path="C:/Users/chris/Downloads/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Moose/Desktop/jar_files/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Moose/Desktop/jar_files/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Moose/Desktop/jar_files/activation.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
