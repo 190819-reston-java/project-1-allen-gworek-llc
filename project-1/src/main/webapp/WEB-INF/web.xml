@@ -20,9 +20,8 @@
 
 	<filter-mapping>
 		<filter-name>corsFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*</url-pattern>
 	</filter-mapping>
-
 	<servlet>
 		<servlet-name>Registration</servlet-name>
 		<servlet-class>com.revature.servlets.UserRegistrationServlet</servlet-class>
