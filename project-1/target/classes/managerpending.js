@@ -12,8 +12,15 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             var tablerow = document.createElement("tr");
             var tabledataID = document.createElement("td");
             tabledataID.innerText = Json[i].id;
+
+            var tabledataUser = document.createElement("td");
+
             var tabledataAmount = document.createElement("td");
             tabledataAmount.innerText = Json[i].dollarAmount;
+            var tabledataDescription = document.createElement("td");
+            tabledataDescription.innerText = Json[i].reimbursementSource;
+
+
             var tabledataRec = document.createElement("td");
             var tabledataResolved = document.createElement("td");
 
@@ -67,13 +74,20 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             tabledataDecisionForm.appendChild(tabledataDecisionBtn);
             tabledataDecision.appendChild(tabledataDecisionForm);
 
-
-
-
-
+            fetch(`http://localhost:8080/project-1/employees/view/target/${Json[i].requestedBy}`)
+                .then((result) => {
+                    return result.json();
+                })
+                .then((resultJson) => {
+                    let employeeJson = resultJson;
+                    tabledataUser.innerText = employeeJson.fullName;
+                })
+                .catch(console.log);
 
             tablerow.appendChild(tabledataID);
+            tablerow.appendChild(tabledataUser);
             tablerow.appendChild(tabledataAmount);
+            tablerow.appendChild(tabledataDescription);
             tablerow.appendChild(tabledataDecision);
             tablerow.appendChild(tabledataRec);
 

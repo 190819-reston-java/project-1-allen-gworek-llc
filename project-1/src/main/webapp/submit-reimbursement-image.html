@@ -5,21 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="template.css">
     <title>Home</title>
 </head>
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="homepage.html"><img class="navbar-logo" src="logo.png"
-                alt="Logo">&nbsp; Allen-Gworek LLC.</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="homepage.html"><img class="navbar-logo" src="logo.png" alt="Logo">&nbsp; Allen-Gworek LLC.</a>
         <a class="navbar w-100" type="text"></a>
         <ul class="navbar-nav px-3 text-nowrap">
             <li class="nav-item">
                 <form name="SignOut" action="/project-1/signout" method="GET">
-                <button class="btn btn-dark">Sign Out</button>
+                    <button class="btn btn-dark">Sign Out</button>
                 </form>
             </li>
         </ul>
@@ -60,22 +58,22 @@
             </nav>
             <main class="col-xl-10 col-sm-12 col-md-12 ml-sm-auto col-12">
                 <form action="/project-1/reimbursements/image" method="POST" enctype="multipart/form-data">
-                    <br>            
+                    <br>
                     <div class="form-group">
-                                    <h2>Submit Receipt
-                                        <br>
-                                    </h2>
-                                </div>
-                                <!-- amount number -->
-                                <div class="form-group">
-                                    <label for="ReimbursementImage">Receipt Image</label>
-                                    <input type="file" class="form-control" id=newReceipt name="receipt" accept=".jpeg, .png, .pdf">
-                                </div>
-                                
-                                <div><br></div>
-                                <button type="submit" class="btn btn-dark">Submit</button>
-                                <!-- need JS to redirect no matter what -->
-                            </form>
+                        <h2>Submit Receipt
+                            <br>
+                        </h2>
+                    </div>
+                    <!-- amount number -->
+                    <div class="form-group">
+                        <label for="ReimbursementImage">Receipt Image</label>
+                        <input type="file" class="form-control" id=newReceipt name="receipt" accept=".jpeg, .png, .pdf">
+                    </div>
+
+                    <div><br></div>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <!-- need JS to redirect no matter what -->
+                </form>
                 </form>
             </main>
         </div>
