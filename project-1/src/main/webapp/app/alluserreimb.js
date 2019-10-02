@@ -21,10 +21,10 @@ function getReimbursements(id) {
 
             var newtitle = document.createElement("h1");
             newtitle.setAttribute("class", "h2");
-            if(userJson[0].requestedByName){
-            newtitle.innerHTML = `${userJson[0].requestedByName}'s Reimbursements`;
-            } else {
+            if(userJson[0].requestedByName === undefined){
                 newtitle.innerHTML = "No Reimbursements On File";
+            } else {
+                newtitle.innerHTML = `${userJson[0].requestedByName}'s Reimbursements`;
             }
             document.querySelector(".resetpage").appendChild(newtitle);
 
