@@ -21,7 +21,11 @@ function getReimbursements(id) {
 
             var newtitle = document.createElement("h1");
             newtitle.setAttribute("class", "h2");
+            if(userJson[0].requestedByName){
             newtitle.innerHTML = `${userJson[0].requestedByName}'s Reimbursements`;
+            } else {
+                newtitle.innerHTML = "No Reimbursements On File";
+            }
             document.querySelector(".resetpage").appendChild(newtitle);
 
 
