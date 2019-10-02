@@ -51,7 +51,7 @@ fetch("http://localhost:8080/project-1/app/reimbursements/pending/all")
 
             var tabledataDecisionForm = document.createElement("form");
             tabledataDecisionForm.setAttribute("class", "form-inline");
-            tabledataDecisionForm.setAttribute("action", "/project-1/reimbursements/resolve");
+            tabledataDecisionForm.setAttribute("action", "/project-1/app/reimbursements/resolve");
             tabledataDecisionForm.setAttribute("method", "POST");
 
             var tabledataDecisionSelect = document.createElement("select");
