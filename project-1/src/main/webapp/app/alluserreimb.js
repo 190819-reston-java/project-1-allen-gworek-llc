@@ -2,7 +2,7 @@
 
 function getReimbursements(id) {
 
-    fetch("http://localhost:8080/project-1/app/reimbursements/view/target/" + id)
+    fetch("/project-1/app/reimbursements/view/target/" + id)
         .then((response) => {
             return response.json();
         })

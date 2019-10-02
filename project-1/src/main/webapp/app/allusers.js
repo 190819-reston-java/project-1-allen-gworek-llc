@@ -1,6 +1,6 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/app/employees/view/all")
+fetch("/project-1/app/employees/view/all")
     .then((response) => {
         console.log(response);
         return response.json();
