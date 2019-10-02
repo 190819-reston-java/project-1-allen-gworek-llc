@@ -51,6 +51,10 @@ public class UserRegistrationServlet extends HttpServlet {
 		}
 
 		String userEmailToVerify = employeeToInsert.getEmail();
+		
+		if (req.getParameter("managerCode").equals("REVATURE1908")) {
+			employeeToInsert.setManagerStatus(true);
+		}
 
 		String verifyNotExists = QueryProcessor.createSelectQuery("email", userEmailToVerify);
 		verifyNotExists = QueryProcessor.specifyTable(verifyNotExists, "employees");
