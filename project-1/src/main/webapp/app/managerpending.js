@@ -40,7 +40,7 @@ fetch("/project-1/app/reimbursements/pending/all")
 
             tabledataRec.appendChild(recLink);
 
-            if (Json[i].approved = true) {
+            if (Json[i].approved === true) {
                 tabledataResolved.innerText = "Approved";
             } else {
                 tabledataResolved.innerText = "Denied";
