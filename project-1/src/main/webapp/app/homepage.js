@@ -22,7 +22,7 @@ fetch("http://localhost:8080/project-1/app/users/current")
             document.querySelector(".homepictures").appendChild(imageone);
 
             var imagetwo = document.createElement("div");
-            imagetwo.setAttribute("class", "col-xl-2 col-md-3 col-sm-5 col-12 offset-xl-0 offset-md-0 offset-sm-0");
+            imagetwo.setAttribute("class", "col-xl-2 col-md-3 col-sm-5 col-12 offset-xl-0 offset-md-3 offset-sm-0");
             var imagetwolink = document.createElement("a");
             imagetwolink.setAttribute("href", "manager-all-reimbursements.html")
             var imagetwoimage = document.createElement("img");
