@@ -94,7 +94,7 @@ public class UploadReimbursementImageServlet extends HttpServlet {
 		dbc.executeQueryInDatabase(updateQueryForDB);
 		System.out.println(updateQueryForDB);
 
-		resp.sendRedirect("/project-1/pending-reimbursements.html");
+		resp.sendRedirect("/project-1/app/pending-reimbursements.html");
 	}
 
 	public static void createFolder(String bucketName, String folderName, AmazonS3 client) {

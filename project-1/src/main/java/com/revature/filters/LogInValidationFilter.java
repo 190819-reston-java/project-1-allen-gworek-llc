@@ -44,7 +44,7 @@ public class LogInValidationFilter extends MyGenericFilter {
 				System.out.println("Looking at loginpage js!");
 			}
 			} else {
-				fixedResponse.sendRedirect("/project-1/loginpage.html");
+				fixedResponse.sendRedirect("/project-1/login/loginpage.html");
 				return;
 			}
 		}

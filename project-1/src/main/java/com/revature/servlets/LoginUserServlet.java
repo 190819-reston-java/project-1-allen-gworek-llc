@@ -38,10 +38,10 @@ public class LoginUserServlet extends HttpServlet {
 				Employee loggedInEmployee = QueryProcessor.createEmployeeFromQueryResults(queryResults);
 				String JSONOfLoggedInEmployee = ObjectToJSON.convertObjectToJSON(loggedInEmployee);
 				req.getSession().setAttribute("currentUser", JSONOfLoggedInEmployee);
-				resp.sendRedirect("/project-1/homepage.html");
+				resp.sendRedirect("/project-1/app/homepage.html");
 			}
 			else {
-				resp.sendRedirect("/project-1/loginpage.html");
+				resp.sendRedirect("/project-1/login/loginpage.html");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

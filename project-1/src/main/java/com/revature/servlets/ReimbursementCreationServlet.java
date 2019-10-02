@@ -67,7 +67,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 			
 			dbc.executeQueryInDatabase(queryToInsertReimbursement);
 			System.out.println(queryToInsertReimbursement);
-			resp.sendRedirect("/project-1/submit-reimbursement-image.html");
+			resp.sendRedirect("/project-1/app/submit-reimbursement-image.html");
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

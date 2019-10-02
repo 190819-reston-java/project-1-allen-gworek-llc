@@ -14,6 +14,6 @@ public class SignOutServlet extends HttpServlet {
 
 		req.getSession().setAttribute("currentUser", null);
 		
-		resp.sendRedirect("/project-1/loginpage.html");
+		resp.sendRedirect("/project-1/app/loginpage.html");
 	}
 }

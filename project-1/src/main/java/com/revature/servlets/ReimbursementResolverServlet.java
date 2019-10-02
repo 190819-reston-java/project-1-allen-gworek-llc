@@ -36,7 +36,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 	
 
 		if(!currentManager.isManagerStatus()) {
-			resp.sendRedirect("/project-1/homepage.html");
+			resp.sendRedirect("/project-1/app/homepage.html");
 			return;
 		}
 		
@@ -142,7 +142,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		resp.sendRedirect("/project-1/manager-pending-reimbursements.html");
+		resp.sendRedirect("/project-1/app/manager-pending-reimbursements.html");
 
 	}
 }

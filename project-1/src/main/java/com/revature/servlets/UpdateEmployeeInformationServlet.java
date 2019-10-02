@@ -86,13 +86,13 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				resp.sendRedirect("/project-1/change-profile.html");
+				resp.sendRedirect("/project-1/app/change-profile.html");
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 
 		}
 
-		resp.sendRedirect("/project-1/homepage.html");
+		resp.sendRedirect("/project-1/app/homepage.html");
 	}
 
 }

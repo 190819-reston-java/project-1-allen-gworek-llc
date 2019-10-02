@@ -62,7 +62,7 @@ public class UserRegistrationServlet extends HttpServlet {
 		try {
 			if (verifyResults.next()) {
 				System.out.println("Email already exists!");
-				resp.sendRedirect("/project-1/signuppage.html");
+				resp.sendRedirect("/project-1/login/signuppage.html");
 			} else {
 				String createUserInTable;
 				try {
@@ -79,7 +79,7 @@ public class UserRegistrationServlet extends HttpServlet {
 					req.getSession().setAttribute("currentUser", ObjectToJSON
 							.convertObjectToJSON(QueryProcessor.createEmployeeFromQueryResults(currentUserResults)));
 
-					resp.sendRedirect("/project-1/homepage.html");
+					resp.sendRedirect("/project-1/app/homepage.html");
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
