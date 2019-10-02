@@ -66,7 +66,7 @@ public class UserRegistrationServlet extends HttpServlet {
 		try {
 			if (verifyResults.next()) {
 				System.out.println("Email already exists!");
-				resp.sendRedirect("/project-1/login/signuppage.html");
+				resp.sendRedirect("/project-1/login/loginpage.html");
 			} else {
 				String createUserInTable;
 				try {
