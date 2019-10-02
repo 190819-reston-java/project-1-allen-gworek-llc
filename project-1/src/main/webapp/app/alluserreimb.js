@@ -22,7 +22,7 @@ function getReimbursements(id) {
             var newtitle = document.createElement("h1");
             newtitle.setAttribute("class", "h2");
             
-            var template = [ ];
+            var template = [];
             if(userJson === template){
                 newtitle.innerHTML = "No Reimbursements On File";
             } else {

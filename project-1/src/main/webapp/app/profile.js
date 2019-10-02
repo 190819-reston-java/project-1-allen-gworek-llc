@@ -21,7 +21,7 @@ fetch("http://localhost:8080/project-1/app/users/current")
 
         var addressline = document.createElement("h3")
         var space;
-        if (Json[i].addressTwo == "") {
+        if (Json.addressTwo == "") {
             space = "";
         } else {
             space = ", ";

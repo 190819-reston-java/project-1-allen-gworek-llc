@@ -32,7 +32,27 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 
 		updatedEmployeeValues.setId(currentEmployee.getId());
 		updatedEmployeeValues.setManagerStatus(currentEmployee.isManagerStatus());
+		
+		DatabaseConnection dbc = new DatabaseConnection();
+		ResultSet validateEmailResults;
+		
+		
+		String updatedEmail = req.getParameter("email");
+		if (!updatedEmail.equals("")) {
+			validateEmailResults = dbc.executeQueryInDatabase("SELECT * FROM employees WHERE email = '" + updatedEmail + "';");
+			try {
+				if(validateEmailResults.next()) {
+					resp.sendRedirect("/project-1/app/change-profile.html");
+					return;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 
+		
 		while (passedInParameters.hasMoreElements()) {
 			try {
 				currentAttribute = passedInParameters.nextElement();
@@ -67,7 +87,6 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 				continue;
 			}
 		}
-		DatabaseConnection dbc = new DatabaseConnection();
 
 		try {
 			String updateQuery = QueryProcessor.createUpdateToMatchOther(currentEmployee, updatedEmployeeValues);
@@ -92,7 +111,7 @@ public class UpdateEmployeeInformationServlet extends HttpServlet {
 
 		}
 
-		resp.sendRedirect("/project-1/app/homepage.html");
+		resp.sendRedirect("/project-1/app/profile.html");
 	}
 
 }
