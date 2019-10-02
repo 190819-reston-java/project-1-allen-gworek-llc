@@ -38,6 +38,7 @@
                     <div class="form-group">
                         <label for="Password">Password</label>
                         <input type="password" class="form-control" id=newPassword name="userPassword" placeholder=Password pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        <small id="passwordHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
                     </div>
                     <div class="form-group">
                         <label for="Full Name">Full Name</label>
@@ -72,7 +73,9 @@
                         <input type="text" class="form-control" id="managercode" name="managerCode">
                     </div>
                     <div><br></div>
+                    <small id="passwordHelp" class="form-text text-muted">Illegal Characters: \</small>
                     <button type="submit" class="btn btn-dark">Submit</button>
+                    
                 </form>
             </div>
             <div class="col-md-6 col-12">
