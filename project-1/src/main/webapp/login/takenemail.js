@@ -6,8 +6,8 @@ window.onload = checkEmail();
 
 function checkEmail() {
     if (previousPage === "http://localhost:8080/project-1/login/signuppage.html") {
-        var oopsemail = document.createElement("h5");
-        oopsemail.setAttribute("color", "red");
+        var oopsemail = document.createElement("h6");
+        oopsemail.setAttribute("style", "color:red");
         oopsemail.innerText = "*That email is already on file"
         
         document.querySelector(".emailoops").appendChild(oopsemail);
