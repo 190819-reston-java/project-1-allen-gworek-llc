@@ -30,6 +30,8 @@ public class LoginUserServlet extends HttpServlet {
 		
 		DatabaseConnection dbc = new DatabaseConnection();
 		
+		dbc.executeQueryInDatabase("SELECT * FROM employees");
+		
 		ResultSet queryResults = dbc.executeQueryInDatabase(queryToGetUser);
 		
 		
