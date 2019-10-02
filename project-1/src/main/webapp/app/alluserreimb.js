@@ -82,7 +82,7 @@ function getReimbursements(id) {
 
                 var tabledataApproval = document.createElement("td");
 
-                if (userJson[i].approvedOrDenied === false) {
+                if (userJson[i].resolvedBy === "") {
                     tabledataApproval.innerText = "Pending Review";
                 } else {
                     if (userJson[i].approved === true) {
@@ -93,7 +93,7 @@ function getReimbursements(id) {
                 }
 
                 var tabledataManager = document.createElement("td");
-                if (userJson[i].approvedOrDenied === false) {
+                if (userJson[i].resolvedBy === "") {
                     tabledataManager.innerText = "Pending Review";
                 } else {
                     tabledataManager.innerText = userJson[i].resolvedByName;
