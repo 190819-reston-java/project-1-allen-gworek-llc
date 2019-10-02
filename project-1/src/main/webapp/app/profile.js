@@ -20,7 +20,13 @@ fetch("http://localhost:8080/project-1/app/users/current")
         jobtitle.appendChild(jobline);
 
         var addressline = document.createElement("h3")
-        var addressnode = document.createTextNode(`\xa0\xa0${Json.address}, ${Json.addressTwo}, ${Json.city}, ${Json.state}\xa0\xa0${Json.zip}`);
+        var space;
+        if (Json[i].addressTwo == "") {
+            space = "";
+        } else {
+            space = ", ";
+        }
+        var addressnode = document.createTextNode(`\xa0\xa0${Json.address}${space}${Json.addressTwo}, ${Json.city}, ${Json.state}\xa0\xa0${Json.zip}`);
         addressline.appendChild(addressnode);
         var addresstitle = document.querySelector(".address");
         addresstitle.appendChild(addressline);

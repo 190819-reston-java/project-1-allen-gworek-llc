@@ -20,7 +20,13 @@ fetch("http://localhost:8080/project-1/app/employees/view/all")
             var tabledataEmail = document.createElement("td");
             tabledataEmail.innerText = Json[i].email;
             var tableFullAddress = document.createElement("td");
-            tableFullAddress.innerText = `${Json[i].address}, ${Json[i].addressTwo}, ${Json[i].city}, ${Json[i].state}  ${Json[i].zip}`;
+            var space;
+            if (Json[i].addressTwo == "") {
+                space = "";
+            } else {
+                space = ", ";
+            }
+            tableFullAddress.innerText = `${Json[i].address}${space}${Json[i].addressTwo}, ${Json[i].city}, ${Json[i].state}  ${Json[i].zip}`;
 
             var tableButton = document.createElement("button");
             tableButton.setAttribute("onclick", `getReimbursements(${Json[i].id})`);
