@@ -1,6 +1,6 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/users/current")
+fetch("http://localhost:8080/project-1/app/users/current")
     .then((response) => {
         return response.json();
     })
@@ -11,3 +11,4 @@ fetch("http://localhost:8080/project-1/users/current")
         hFiveName.innerText = `\xa0\xa0\xa0\xa0Welcome ${userJson.fullName}`;
         document.querySelector(".middlenavbar").appendChild(hFiveName);
     })
+    .catch(console.log);

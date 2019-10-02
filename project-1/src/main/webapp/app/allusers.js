@@ -1,14 +1,14 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/employees/view/all")
-.then((response)=>{
-    console.log(response);
-    return response.json();
-})
-.then((thisJson)=>{
-    let Json = thisJson;
+fetch("http://localhost:8080/project-1/app/employees/view/all")
+    .then((response) => {
+        console.log(response);
+        return response.json();
+    })
+    .then((thisJson) => {
+        let Json = thisJson;
         var i;
-        for(i=0; i<Json.length; i++) {
+        for (i = 0; i < Json.length; i++) {
             var tablerow = document.createElement("tr");
 
             var tabledataID = document.createElement("td");
@@ -21,16 +21,21 @@ fetch("http://localhost:8080/project-1/employees/view/all")
             tabledataEmail.innerText = Json[i].email;
             var tableFullAddress = document.createElement("td");
             tableFullAddress.innerText = `${Json[i].address}, ${Json[i].addressTwo}, ${Json[i].city}, ${Json[i].state}  ${Json[i].zip}`;
-            
-            
+
+            var tableButton = document.createElement("button");
+            tableButton.setAttribute("onclick", `getReimbursements(${Json[i].id})`);
+            tableButton.setAttribute("class", "btn btn-dark");
+            tableButton.innerText = "Select";
+
             tablerow.appendChild(tabledataID);
             tablerow.appendChild(tabledataFullName);
             tablerow.appendChild(tabledataJobTitle);
             tablerow.appendChild(tabledataEmail);
             tablerow.appendChild(tableFullAddress);
+            tablerow.appendChild(tableButton);
 
-            document.querySelector(".tablebody").appendChild(tablerow);
+            document.querySelector(".tablebodychild").appendChild(tablerow);
 
         }
-})
-.catch(console.log);
+    })
+    .catch(console.log);

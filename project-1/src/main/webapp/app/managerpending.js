@@ -1,6 +1,6 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/reimbursements/pending/all")
+fetch("http://localhost:8080/project-1/app/reimbursements/pending/all")
     .then((response) => {
         console.log(response);
         return response.json();
@@ -14,6 +14,7 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             tabledataID.innerText = Json[i].id;
 
             var tabledataUser = document.createElement("td");
+            tabledataUser.innerText = Json[i].requestedByName;
 
             var tabledataAmount = document.createElement("td");
             tabledataAmount.innerText = Json[i].dollarAmount;
@@ -76,17 +77,6 @@ fetch("http://localhost:8080/project-1/reimbursements/pending/all")
             tabledataDecisionForm.appendChild(tabledataDecisionSelect);
             tabledataDecisionForm.appendChild(tabledataDecisionBtn);
             tabledataDecision.appendChild(tabledataDecisionForm);
-
-            fetch(`http://localhost:8080/project-1/employees/view/target/${Json[i].requestedBy}`)
-                .then((result) => {
-                    return result.json();
-                })
-                .then((resultJson) => {
-                    let employeeJson = resultJson;
-                    tabledataUser.innerText = employeeJson.fullName;
-                })
-                .catch(console.log);
-
             tablerow.appendChild(tabledataID);
             tablerow.appendChild(tabledataUser);
             tablerow.appendChild(tabledataAmount);

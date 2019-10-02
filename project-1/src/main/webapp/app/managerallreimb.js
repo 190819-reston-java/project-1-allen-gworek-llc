@@ -1,6 +1,6 @@
 'use strict';
 
-fetch("http://localhost:8080/project-1/reimbursements/resolved/all")
+fetch("http://localhost:8080/project-1/app/reimbursements/resolved/all")
     .then((response) => {
         return response.json();
     })
@@ -14,6 +14,7 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved/all")
             tabledataID.innerText = Json[i].id;
 
             var tabledataUser = document.createElement("td");
+            tabledataUser.innerText = Json[i].requestedByName;
 
             var tabledataAmount = document.createElement("td");
             tabledataAmount.innerText = Json[i].dollarAmount;
@@ -22,13 +23,14 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved/all")
             tabledataDescription.innerText = Json[i].reimbursementSource;
 
             var tabledataResolved = document.createElement("td");
-            if (Json[i].approved = true) {
+            if (Json[i].approved === true) {
                 tabledataResolved.innerText = "Approved";
             } else {
                 tabledataResolved.innerText = "Denied";
             }
 
             var tabledataManager = document.createElement("td");
+            tabledataManager.innerText = Json[i].resolvedByName;
 
             var tabledataRec = document.createElement("td");
             var recLink = document.createElement("a");
@@ -48,31 +50,10 @@ fetch("http://localhost:8080/project-1/reimbursements/resolved/all")
             tabledataRec.appendChild(recLink);
 
             tablerow.appendChild(tabledataID);
-
-            fetch(`http://localhost:8080/project-1/employees/view/target/${Json[i].requestedBy}`)
-                .then((resulttwo) => {
-                    return resulttwo.json();
-                })
-                .then((resulttwoJson) => {
-                    let employeeJson = resulttwoJson;
-                    tabledataUser.innerText = employeeJson.fullName;
-                })
-                .catch(console.log);
             tablerow.appendChild(tabledataUser);
             tablerow.appendChild(tabledataAmount);
             tablerow.appendChild(tabledataDescription);
             tablerow.appendChild(tabledataResolved);
-
-            fetch(`http://localhost:8080/project-1/employees/view/target/${Json[i].resolvedBy}`)
-                .then((result) => {
-                    return result.json();
-                })
-                .then((resultJson) => {
-                    let managerJson = resultJson;
-                    tabledataManager.innerText = managerJson.fullName;
-                })
-                .catch(console.log);
-
             tablerow.appendChild(tabledataManager);
             tablerow.appendChild(tabledataRec);
             document.querySelector(".tablebody").appendChild(tablerow);
