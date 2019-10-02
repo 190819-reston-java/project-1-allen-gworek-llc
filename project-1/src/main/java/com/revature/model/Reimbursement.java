@@ -9,6 +9,8 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 	private String dollarAmount;
 	private boolean isApproved;
 	private String imageURL;
+	private String requestedByName;
+	private String resolvedByName;
 	
 	public Reimbursement() {
 		this.id = -1;
@@ -18,6 +20,8 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 		this.isApproved = false;
 		this.imageURL = "";
 		this.dollarAmount = "0";
+		this.requestedByName = "";
+		this.resolvedByName = "";
 	}
 	
 	public Reimbursement(int id, String reimbursementSource, int requestedBy, int resolvedBy, boolean isApproved,
@@ -29,6 +33,8 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 		this.isApproved = isApproved;
 		this.imageURL = imageURL;
 		this.dollarAmount = dollarAmount;
+		this.requestedByName = "";
+		this.resolvedByName = "";
 	}
 	
 	public Reimbursement(String reimbursementSource, String imageURL) {
@@ -109,6 +115,22 @@ public class Reimbursement implements Comparable<Reimbursement>, AppUsable {
 	
 	public void setDollarAmount(String dollarAmount) {
 		this.dollarAmount = dollarAmount;
+	}
+
+	public String getRequestedByName() {
+		return requestedByName;
+	}
+
+	public void setRequestedByName(String requestedByName) {
+		this.requestedByName = requestedByName;
+	}
+
+	public String getResolvedByName() {
+		return resolvedByName;
+	}
+
+	public void setResolvedByName(String resolvedByName) {
+		this.resolvedByName = resolvedByName;
 	}
 
 	public boolean getApprovedOrDenied() {

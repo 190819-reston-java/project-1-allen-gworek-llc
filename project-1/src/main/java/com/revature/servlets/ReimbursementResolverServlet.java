@@ -94,6 +94,7 @@ public class ReimbursementResolverServlet extends HttpServlet {
 
 		updateReimbursement.setResolvedBy(managerID);
 		updateReimbursement.setApproved(approvalStatus);
+		updateReimbursement.setResolvedByName(currentManager.getFullName());
 
 		String updateQuery;
 		try {

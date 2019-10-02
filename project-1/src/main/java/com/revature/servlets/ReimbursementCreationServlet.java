@@ -21,7 +21,7 @@ public class ReimbursementCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		int employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser")).getId();
+		Employee employeeWhoCreatedRequest = JSONToObject.convertEmployeeJSONToObject((String)req.getSession().getAttribute("currentUser"));
 		
 		Enumeration<String> passedInParameters = req.getParameterNames();
 
@@ -55,7 +55,8 @@ public class ReimbursementCreationServlet extends HttpServlet {
 			}
 		}
 		
-		createdReimbursement.setRequestedBy(employeeWhoCreatedRequest);
+		createdReimbursement.setRequestedBy(employeeWhoCreatedRequest.getId());
+		createdReimbursement.setRequestedByName(employeeWhoCreatedRequest.getFullName());
 		
 		DatabaseConnection dbc = new DatabaseConnection();
 		
