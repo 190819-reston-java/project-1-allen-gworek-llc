@@ -142,7 +142,7 @@
 
 	<servlet-mapping>
 		<servlet-name>LogInUser</servlet-name>
-		<url-pattern>/login/login</url-pattern>
+		<url-pattern>/login/login.html</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
